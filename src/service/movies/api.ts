@@ -10,3 +10,23 @@ export async function getNowPlayingMovies() {
   const data: MoviesDTO = await response.json();
   return data;
 }
+
+export async function getMovieById(id: number) {
+  const response = await api(`/movie/${id}?`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data: Movie = await response.json();
+  return data;
+}
+
+export async function getPopularMovies() {
+  const response = await api(`/movie/popular?page=2`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data: MoviesDTO = await response.json();
+  return data;
+}
