@@ -6,17 +6,19 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { originalImageURL } from "@/lib/utils";
-import { getNowPlayingMovies } from "@/service/movies/api";
+import { getNowPlayingMovies, getPopularMovies } from "@/service/movies/api";
 import Image from "next/image";
 import React from "react";
 import { CarouselAutoplay } from "../../../components/carousel-autoplay";
+import ListCards from "@/components/list-cards";
 
 export default async function Home() {
-  const movies = await getNowPlayingMovies();
+  const nowPlayingMovies = await getNowPlayingMovies();
+  const popularMovies = await getPopularMovies();
   return (
-    <main className="flex justify-center items-center">
+    <main className="flex flex-col gap-8 justify-center items-center">
       <CarouselAutoplay>
-        {movies.results.map((movie) => (
+        {nowPlayingMovies.results.map((movie) => (
           <CarouselItem key={movie.id} className="">
             <Image
               unoptimized
@@ -31,6 +33,7 @@ export default async function Home() {
           </CarouselItem>
         ))}
       </CarouselAutoplay>
+      <ListCards path="/movies/" titleSection="Popular Movies" data={popularMovies} />
     </main>
   );
 }
