@@ -1,22 +1,61 @@
-import { Film, Home, Search, Settings, Tv } from "lucide-react";
+import { Film, Home, LucideUsers, Search, Settings, Tv } from "lucide-react";
 import Link from "next/link";
+import { SearchBar } from "./search-bar";
+import { Suspense } from "react";
+import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuItem,
+} from "./ui/dropdown-menu";
+import { ThemeSwitcher } from "./switcher-theme";
 
 export default function Header() {
   return (
-    <div className="p-2 flex items-center justify-between w-full max-sm:flex-col px-4 h-16 max-sm:h-28 shadow-xl  sticky top-0 z-[99999]">
-      <h1 className="lg:text-3xl md:text-2xl max-sm:text-2xl text-primary font-medium">
-        CinephileX
-      </h1>
-      <nav className="flex gap-8 justify-center items-center">
-        <Link href="/" className="py-2 no-underline">
+    <div className="p-3 grid grid-cols-3 w-full max-sm:place-items-center bg-zinc-50 dark:bg-zinc-900 max-sm:grid-cols-1 px-6 h-20 max-sm:h-32 shadow-xl sticky top-0 z-[99999]">
+      <nav className="flex items-center">
+        <h1 className="lg:text-3xl md:text-2xl max-sm:hidden leading-relaxed text-primary font-medium">
+          CinephileX
+        </h1>
+      </nav>
+      <nav className="flex gap-8 justify-center items-center ">
+        <Link href="/" className="py-2 no-underline hover:underline">
           <div className="flex items-center justify-center gap-3">
             <Home size={24} className={`text-lg text-primary`} />
             <p className={`text-lg max-[450px]:hidden`}>Home</p>
           </div>
         </Link>
+
+        <Link href="/movies" className="py-2 no-underline hover:underline">
+          <div className="flex items-center justify-center gap-3">
+            <Film size={24} className={`text-lg text-primary`} />
+            <p className={`text-lg max-[450px]:hidden`}>Movies</p>
+          </div>
+        </Link>
+
+        <Link href="/series" className="py-2 no-underline hover:underline">
+          <div className="flex items-center justify-center gap-3">
+            <Tv size={24} className={`text-lg text-primary`} />
+            <p className={`text-lg max-[450px]:hidden`}>Series</p>
+          </div>
+        </Link>
+        <Link href="/persons" className="py-2 no-underline hover:underline">
+          <div className="flex items-center justify-center gap-3">
+            <LucideUsers size={24} className={`text-lg text-primary`} />
+            <p className={`text-lg max-[450px]:hidden`}>Persons</p>
+          </div>
+        </Link>
       </nav>
-      <nav>
-        <Settings size={24} className={`text-lg text-primary`} />
+      <nav className="flex gap-4 items-center justify-end">
+        <Suspense>
+          <SearchBar />
+        </Suspense>
+        <Suspense>
+          <ThemeSwitcher />
+        </Suspense>
       </nav>
     </div>
   );
