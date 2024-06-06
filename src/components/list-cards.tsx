@@ -10,35 +10,53 @@ import {
   CarouselPrevious,
   CarouselItem,
 } from "./ui/carousel";
-import { Star } from "lucide-react";
+import { Film, Star, Tv, User } from "lucide-react";
 import { MoviesDTO } from "@/service/movies/moviesDTO";
 
 interface CarouselCardsProps {
   data: MoviesDTO;
   path: string;
   titleSection: string;
+  type: string;
 }
 export default function ListCards({
   data,
   path,
   titleSection,
+  type,
 }: CarouselCardsProps) {
+  function generateIconType(type: string) {
+    if (type === "movie") {
+      return <Film size={24} className="text-primary" />;
+    }
+    if (type === "tv") {
+      return <Tv size={24} className="text-primary" />;
+    }
+    if (type === "person") {
+      return <User size={24} className="text-primary" />;
+    }
+  }
   return (
     <section className="mx-10">
-      <h1 className="text-2xl font-bold my-6 ">{titleSection}</h1>
+      <div className="flex gap-2 items-center">
+        {generateIconType(type)}
+        <h1 className="text-lg font-bold my-6 ">{titleSection}</h1>
+      </div>
       <div className="flex flex-wrap gap-2 justify-center">
         <Carousel>
           <CarouselContent>
             {data.results.map((item) => (
-              <CarouselItem key={item.id} className="basis-auto">
+              <CarouselItem
+                key={item.id}
+                className="basis-auto justify-center items-center"
+              >
                 <Link
                   href={`${path} + ${item.id}`}
                   key={item.id}
-                  className="hover:transition-transform hover:scale-105 rounded-md relative hover:duration-500 shadow-lg shadow-black/30 hover:ease-in-out"
+                  className=" rounded-md relative hover:duration-500 shadow-lg shadow-black/30 hover:ease-in-out"
                 >
                   <Image
                     priority={true}
-                    unoptimized
                     src={`${resizeImageURL}${item.poster_path}`}
                     alt={item.title ?? ""}
                     width={240}
