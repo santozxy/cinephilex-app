@@ -11,6 +11,8 @@ import Image from "next/image";
 import React from "react";
 import { CarouselAutoplay } from "../../../components/carousel-autoplay";
 import ListCards from "@/components/list-cards";
+import Link from "next/link";
+
 
 export default async function Home() {
   const nowPlayingMovies = await getNowPlayingMovies();
@@ -19,21 +21,27 @@ export default async function Home() {
     <main className="flex flex-col gap-8 justify-center items-center">
       <CarouselAutoplay>
         {nowPlayingMovies.results.map((movie) => (
-          <CarouselItem key={movie.id} className="">
-            <Image
-              unoptimized
-              priority
-              src={`${originalImageURL}${movie.backdrop_path}`}
-              alt={movie.title}
-              width={1200}
-              height={512}
-              quality={70}
-              className="object-fill object-center w-full md:h-[32rem] lg:h-[40rem] max-sm:h-64 bg-center rounded-md shadow-lg "
-            />
+          <CarouselItem key={movie.id} className="basis-auto shadow-xl shadow-black/40">
+            <Link href={`/movies/${movie.id}`}>
+              <Image
+                unoptimized
+                priority
+                src={`${originalImageURL}${movie.backdrop_path}`}
+                alt={movie.title}
+                width={1200}
+                height={512}
+                quality={80}
+                className="object-contain max-sm:h-64 bg-center rounded-md shadow-lg"
+              />
+            </Link>
           </CarouselItem>
         ))}
       </CarouselAutoplay>
-      <ListCards path="/movies/" titleSection="Popular Movies" data={popularMovies} />
+      <ListCards
+        path="/movies/"
+        titleSection="Popular Movies"
+        data={popularMovies}
+      />
     </main>
   );
 }
