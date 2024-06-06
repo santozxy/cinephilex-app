@@ -30,3 +30,13 @@ export async function getPopularMovies() {
   const data: MoviesDTO = await response.json();
   return data;
 }
+
+export async function getTopRatedMovies() {
+  const response = await api(`/movie/top_rated?`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data: MoviesDTO = await response.json();
+  return data;
+}
