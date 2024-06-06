@@ -6,7 +6,7 @@ export default function CinephilexLayout({
   return (
     <div className="">
       <Header />
-      <main className="p-6">{children}</main>
+      <main className="px-6 pb-6">{children}</main>
     </div>
   );
 }
