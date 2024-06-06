@@ -40,3 +40,23 @@ export async function getTopRatedMovies() {
   const data: MoviesDTO = await response.json();
   return data;
 }
+
+export async function getBrazilianPopularMovies() {
+  const response = await api(`/discover/movie?sort_by=popularity.desc&with_origin_country=BR`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data: MoviesDTO = await response.json();
+  return data;
+}
+
+export async function getTrendingDayMovies() {
+  const response = await api(`/trending/movie/day?`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data: MoviesDTO = await response.json();
+  return data;
+}
