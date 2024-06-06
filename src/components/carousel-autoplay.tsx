@@ -11,7 +11,7 @@ import Autoplay from "embla-carousel-autoplay";
 
 export function CarouselAutoplay({ children }: { children: React.ReactNode }) {
   const plugin = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true, waitForTransition: true, },)
+    Autoplay({ delay: 3000, stopOnInteraction: true, waitForTransition: true,jump:false },)
   );
 
   return (
