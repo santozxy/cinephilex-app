@@ -11,12 +11,12 @@ import Autoplay from "embla-carousel-autoplay";
 
 export function CarouselAutoplay({ children }: { children: React.ReactNode }) {
   const plugin = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true, waitForTransition: true},)
+    Autoplay({ delay: 3000, stopOnInteraction: true, waitForTransition: true, },)
   );
 
   return (
     <Carousel
-      className="mx-10 shadow-lg shadow-black/30"
+      className="mx-10"
       plugins={[plugin.current]}
     >
       <CarouselContent>{children}</CarouselContent>
