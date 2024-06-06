@@ -20,7 +20,7 @@ export function ListSearchCards({ data }: CarouselCardsProps) {
     })
     .filter((item) => item.poster_path);
 
-  const generateLink = (item: Result) => {
+  function generateLink(item: Result) {
     if (item.media_type === "movie") {
       return `/movies/${item.id}`;
     }
@@ -31,7 +31,21 @@ export function ListSearchCards({ data }: CarouselCardsProps) {
       return `/persons/${item.id}`;
     }
     return "";
-  };
+  }
+
+  function generateTag(item: Result) {
+    if (item.media_type === "movie") {
+      return "Filme";
+    }
+    if (item.media_type === "tv") {
+      return "Série";
+    }
+    if (item.media_type === "person") {
+      return "Pessoa";
+    }
+    return "";
+  }
+
   return (
     <section className="flex flex-wrap gap-4 justify-center">
       {newData.map((item) => (
@@ -41,8 +55,6 @@ export function ListSearchCards({ data }: CarouselCardsProps) {
           className="hover:transition-transform hover:scale-105 rounded-md relative hover:duration-500 shadow-lg shadow-black/30 hover:ease-in-out"
         >
           <Image
-            priority={true}
-            unoptimized
             src={`${resizeImageURL}${item.poster_path}`}
             alt={item.title ?? ""}
             width={240}
@@ -53,10 +65,7 @@ export function ListSearchCards({ data }: CarouselCardsProps) {
           <div className="absolute top-2 -left-1 rounded-sm  p-1 w-14 bg-primary bg-opacity-85 text-zinc-50 text-center">
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-zinc-50" />
-              <span className="text-xs text-center">
-                {item.media_type.charAt(0).toUpperCase() +
-                  item.media_type.substring(1)}
-              </span>
+              <span className="text-xs text-center">{generateTag(item)}</span>
             </div>
           </div>
         </Link>
