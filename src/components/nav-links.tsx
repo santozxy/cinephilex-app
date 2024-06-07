@@ -10,10 +10,7 @@ export function NavLinks() {
   console.log(path);
   return (
     <nav className="flex gap-8 justify-center items-center ">
-      <Link
-        href="/"
-        className={`py-2 no-underline   sm:hidden `}
-      >
+      <Link href="/" className={`py-2 no-underline sm:hidden `}>
         <div className="flex items-center justify-center gap-3">
           <Image
             className=""
@@ -25,27 +22,47 @@ export function NavLinks() {
         </div>
       </Link>
 
-      <Link href="/" className={`py-2 no-underline ${path === "/" ? "text-primary":""}`}>
+      <Link
+        href="/"
+        className={`py-2 no-underline hover:text-primary duration-300 ${
+          path === "/" ? "text-primary" : ""
+        }`}
+      >
         <div className="flex items-center justify-center gap-3">
           <Home size={24} className={`text-lg text-primary`} />
           <p className={`text-lg max-[450px]:hidden`}>Início</p>
         </div>
       </Link>
 
-      <Link href="/movies" className={`py-2 no-underline ${path === "/movies" ? "text-primary":""}`}>
+      <Link
+        href="/movies"
+        className={`py-2 no-underline hover:text-primary duration-300 ${
+          path === "/movies" ? "text-primary" : ""
+        }`}
+      >
         <div className="flex items-center justify-center gap-3">
           <Film size={24} className={`text-lg text-primary`} />
           <p className={`text-lg max-[450px]:hidden`}>Filmes</p>
         </div>
       </Link>
 
-      <Link href="/series" className={`py-2 no-underline ${path === "/series" ? "text-primary":""}`}>
+      <Link
+        href="/series"
+        className={`py-2 no-underline hover:text-primary duration-300 ${
+          path === "/series" ? "text-primary" : ""
+        }`}
+      >
         <div className="flex items-center justify-center gap-3">
           <Tv size={24} className={`text-lg text-primary`} />
           <p className={`text-lg max-[450px]:hidden`}>Séries</p>
         </div>
       </Link>
-      <Link href="/persons" className={`py-2 no-underline ${path === "/persons" ? "text-primary":""}`}>
+      <Link
+        href="/persons"
+        className={`py-2 no-underline hover:text-primary duration-300 ${
+          path === "/persons" ? "text-primary" : ""
+        }`}
+      >
         <div className="flex items-center justify-center gap-3">
           <LucideUsers size={24} className={`text-lg text-primary`} />
           <p className={`text-lg max-[450px]:hidden`}>Pessoas</p>
