@@ -36,8 +36,6 @@ export function CarouselAutoplay({
         <CarouselContent>{children}</CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
-      </Carousel>
-      <span className="w-3 h-3 bg-primary"/>
-    </div>
+      </Carousel>    </div>
   );
 }

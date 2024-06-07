@@ -35,10 +35,10 @@ export default async function Home() {
                 <Image
                   src={`${originalImageURL}${movie.backdrop_path}`}
                   alt={movie.title}
-                  width={1280}
-                  height={720}
-                  loading="lazy"
+                  width={960}
+                  height={560}
                   quality={70}
+                  priority
                   className=" max-sm:h-64 h-[35rem] bg-center w-[60rem] max-sm:w-full rounded-md shadow-lg"
                 />
               </Link>

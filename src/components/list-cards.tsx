@@ -40,7 +40,7 @@ export default function ListCards({
     <section className="mx-10">
       <div className="flex gap-2 items-center">
         {generateIconType(type)}
-        <h1 className="text-lg font-bold my-6 ">{titleSection}</h1>
+        <h1 className="text-lg font-semibold my-6">{titleSection}</h1>
       </div>
       <div className="flex flex-wrap gap-2 justify-center">
         <Carousel>
@@ -59,8 +59,8 @@ export default function ListCards({
                     priority={true}
                     src={`${resizeImageURL}${item.poster_path}`}
                     alt={item.title ?? ""}
-                    width={240}
-                    height={352}
+                    width={192}
+                    height={272}
                     className="object-cover object-center w-[12rem] max-sm:h-60 max-sm:w-36 lg:h-[17rem] rounded-md"
                   />
 

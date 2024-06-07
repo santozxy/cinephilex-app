@@ -3,7 +3,7 @@ import { twMerge } from "tailwind-merge";
 export function Skeleton({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
-      className={twMerge("bg-zinc-50/40 animate-pulse rounded-md", className)}
+      className={twMerge("dark:bg-zinc-50/40 bg-zinc-400 animate-pulse rounded-md", className)}
       {...props}
     />
   );

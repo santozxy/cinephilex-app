@@ -12,12 +12,12 @@ import React from "react";
 export default function HomeLoading() {
   return (
     <main className="flex flex-col gap-8 justify-center items-center mx-10">
-      <div className="flex flex-col mx-10">
+      <div className="flex flex-col mx-10 w-full">
         <div className="flex gap-2 items-center">
           <Popcorn size={24} className="text-primary" />
           <h1 className="text-lg font-bold my-6 ">Em Cartaz</h1>
         </div>
-        <Skeleton className="max-sm:h-64 h-[35rem] bg-center w-[68rem] max-sm:w-full rounded-md shadow-lg" />
+        <Skeleton className="max-sm:h-64 h-[35rem] w-full rounded-md shadow-lg" />
       </div>
       <div className="flex gap-2 items-center">
         <Film size={24} className="text-primary" />
