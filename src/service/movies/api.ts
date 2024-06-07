@@ -73,3 +73,19 @@ export async function getGenreMovies(id: string) {
   const data: MoviesDTO = await response.json();
   return data;
 }
+
+export async function getMovieWithHighPopularity() {
+  const yearActual = new Date().getFullYear();
+  const response = await api(
+    `/discover/movie?include_adult=false&include_video=false&page=1&primary_release_year=${yearActual}&sort_by=popularity.desc`,
+    {
+      next: {
+        revalidate: 60 * 60,
+      },
+    }
+  );
+  const data: MoviesDTO = await response.json();
+  const randomIndex = Math.floor(Math.random() * data.results.length);
+  const movie = data.results[randomIndex];
+  return movie;
+}
