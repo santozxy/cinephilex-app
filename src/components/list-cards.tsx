@@ -53,7 +53,7 @@ export default function ListCards({
                 <Link
                   href={`${path} + ${item.id}`}
                   key={item.id}
-                  className=" rounded-md relative hover:duration-500 shadow-lg shadow-black/30 hover:ease-in-out"
+                  className="rounded-md relative hover:duration-500 shadow-lg shadow-black/30 hover:ease-in-out"
                 >
                   <Image
                     priority={true}
@@ -61,10 +61,10 @@ export default function ListCards({
                     alt={item.title ?? ""}
                     width={192}
                     height={272}
-                    className="object-cover object-center w-[12rem] max-sm:h-60 max-sm:w-36 lg:h-[17rem] rounded-md"
+                    className="object-cover object-center w-[12rem] max-sm:h-48 max-sm:w-36 lg:h-[17rem] rounded-md"
                   />
 
-                  <div className="absolute top-2 -left-1 rounded-sm  p-1 w-14 bg-primary bg-opacity-85 text-zinc-50 text-center">
+                  <div className="absolute top-2 -left-1 rounded-sm  p-1 w-14 bg-primary bg-opacity-85  text-center">
                     <div className="flex items-center gap-2">
                       <Star size={16} className="text-zinc-50" />
                       <span className="text-xs text-center">
