@@ -1,7 +1,6 @@
 import { resizeImageURL } from "@/lib/utils";
 import React from "react";
 import Image from "next/image";
-import { Result, SearchDTO } from "@/service/search/searchDTO";
 import Link from "next/link";
 import {
   Carousel,
@@ -12,6 +11,12 @@ import {
 } from "./ui/carousel";
 import { Film, Star, Tv, User } from "lucide-react";
 import { MoviesDTO } from "@/service/movies/moviesDTO";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 interface CarouselCardsProps {
   data: MoviesDTO;
@@ -38,48 +43,79 @@ export default function ListCards({
   }
   return (
     <section className="mx-10">
-      <div className="flex gap-2 items-center">
-        {generateIconType(type)}
-        <h1 className="text-lg font-semibold my-6">{titleSection}</h1>
-      </div>
-      <div className="flex flex-wrap gap-2 justify-center">
-        <Carousel>
-          <CarouselContent>
-            {data.results.map((item) => (
-              <CarouselItem
-                key={item.id}
-                className="basis-auto justify-center items-center"
-              >
-                <Link
-                  href={`${path} + ${item.id}`}
+      <TooltipProvider>
+        <div className="flex gap-2 items-center">
+          {generateIconType(type)}
+          <h1 className="text-lg font-semibold ">{titleSection}</h1>
+        </div>
+        <div className="flex justify-center">
+          <Carousel>
+            <CarouselContent className=" py-6">
+              {data.results.map((item) => (
+                <CarouselItem
                   key={item.id}
-                  className="rounded-md relative hover:duration-500 shadow-lg shadow-black/30 hover:ease-in-out"
+                  className="basis-auto rounded-md group relative hover:z-[99999]  hover:scale-105 transition-transform duration-500 ease-in-out"
                 >
-                  <Image
-                    priority={true}
-                    src={`${resizeImageURL}${item.poster_path}`}
-                    alt={item.title ?? ""}
-                    width={192}
-                    height={272}
-                    className="object-cover object-center w-[12rem] max-sm:h-48 max-sm:w-36 lg:h-[17rem] rounded-md"
-                  />
+                  <Link href={`${path}/${item.id}`} scroll={false}>
+                    <Tooltip delayDuration={100}>
+                      <TooltipTrigger>
+                        <Image
+                          priority={true}
+                          src={`${resizeImageURL}${item.poster_path}`}
+                          alt={item.title ?? ""}
+                          width={192}
+                          height={272}
+                          className=" object-center w-[12rem] max-sm:h-48 max-sm:w-36 lg:h-[16rem] rounded-md shadow-xl"
+                        />
+                      </TooltipTrigger>
+                      <TooltipContent side="right">
+                        <div className="w-[20rem] flex flex-col p-2 max-sm:h-48 max-sm:w-36 lg:h-[15.5rem] rounded-md shadow-xl">
+                          <div className="flex flex-col gap-4">
+                            <div className="flex items-center justify-between">
+                              <h1 className="text-xl font-semibold font-mono">
+                                {item.title}
+                              </h1>
+                              <div className="flex items-center gap-2">
+                                <Star size={22} className="text-yellow-400" />
+                                <span className="text-lg text-center ">
+                                  {item.vote_average?.toFixed(1)}
+                                </span>
+                              </div>
+                            </div>
+                            <p className="text-zinc-300 text-justify max-sm:hidden">
+                              {item.overview.slice(0, 202) + "..."}
+                            </p>
+                            <Link
+                              href={`${path}/${item.id}`}
+                              className="bg-primary bg-opacity-50 duration-300 ease-in-out rounded-full max-sm:p-1 p-1.5 flex justify-center items-center hover:bg-opacity-80 w-56 max-sm:hidden shadow-lg"
+                            >
+                              <span className="font-semibold max-sm:text-sm">
+                                Ver detalhes
+                              </span>
+                            </Link>
+                          </div>
+                        </div>
+                      </TooltipContent>
+                    </Tooltip>
+                  </Link>
 
-                  <div className="absolute top-2 -left-1 rounded-sm  p-1 w-14 bg-primary bg-opacity-85  text-center">
+                  <div className=" absolute top-4 left-3 rounded-sm p-1 w-14 bg-primary bg-opacity-85  text-center">
                     <div className="flex items-center gap-2">
                       <Star size={16} className="text-zinc-50" />
-                      <span className="text-xs text-center">
+                      <span className="text-xs text-center ">
                         {item.vote_average?.toFixed(1)}
                       </span>
                     </div>
                   </div>
-                </Link>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselNext />
-          <CarouselPrevious />
-        </Carousel>
-      </div>
+                  <div className="invisible group-hover:visible"></div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselNext />
+            <CarouselPrevious />
+          </Carousel>
+        </div>
+      </TooltipProvider>
     </section>
   );
 }
