@@ -1,75 +1,90 @@
-import { CarouselItem } from "@/components/ui/carousel";
 import { originalImageURL } from "@/lib/utils";
 import {
   getBrazilianPopularMovies,
-  getNowPlayingMovies,
+  getMovieWithHighPopularity,
   getPopularMovies,
 } from "@/service/movies/api";
 import Image from "next/image";
 import React from "react";
-import { CarouselAutoplay } from "../../../components/carousel-autoplay";
 import ListCards from "@/components/list-cards";
-import Link from "next/link";
 import { getTopRatedSeries, getTrendingDaySeries } from "@/service/series/api";
+import Link from "next/link";
+import { Film, Popcorn } from "lucide-react";
 
 export default async function Home() {
-  const nowPlayingMovies = await getNowPlayingMovies();
+  const movieHighPopularity = await getMovieWithHighPopularity();
   const popularMovies = await getPopularMovies();
   const brazilianPopularMovies = await getBrazilianPopularMovies();
   const TopRatedSeries = await getTopRatedSeries();
   const trendingSeries = await getTrendingDaySeries();
 
   return (
-    <main className="flex flex-col gap-8 justify-center items-center">
-      <CarouselAutoplay titleSection="Em Cartaz">
-        {nowPlayingMovies.results.map((movie) => {
-          if (!movie.backdrop_path) {
-            return null;
-          }
-          return (
-            <CarouselItem
-              key={movie.id}
-              className="basis-auto shadow-xl shadow-black/40"
+    <main className="flex flex-col justify-center items-center">
+      <section className="w-full h-[40rem] max-sm:h-64  relative">
+        <Image
+          priority
+          src={originalImageURL + movieHighPopularity.backdrop_path}
+          width={1280}
+          height={720}
+          alt={movieHighPopularity.title}
+          className="object-fill object-center w-full h-full"
+        />
+     
+     <Link className="z-[99]" href={`/movies/${movieHighPopularity.id}`}>
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-zinc-900"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-zinc-900"></div>
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-zinc-900"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-zinc-900"></div>
+      </Link>
+        <div className="absolute sm:top-28 top-4 max-sm:left-0 left-10 flex items-center justify-center">
+
+          <div className="flex flex-col gap-4 sm:w-96 p-2 rounded-lg">
+            <div className="flex sm:flex-col items-start gap-4">
+              <Popcorn size={24} className="text-primary" />
+              <h1 className="sm:text-xl font-semibold font-mono">
+                {movieHighPopularity.title}
+              </h1>
+            </div>
+            <p className="text-zinc-300 text-justify max-sm:hidden">
+              {" "}
+              {movieHighPopularity.overview.slice(0, 202) + "..."}
+            </p>
+            <Link
+              className="bg-primary bg-opacity-50 duration-300 ease-in-out rounded-full max-sm:p-1 p-1.5 flex justify-center items-center hover:bg-opacity-80 w-56 max-sm:hidden shadow-lg"
+              href={`/movies/${movieHighPopularity.id}`}
             >
-              <Link href={`/movies/${movie.id}`}>
-                <Image
-                  src={`${originalImageURL}${movie.backdrop_path}`}
-                  alt={movie.title}
-                  width={960}
-                  height={560}
-                  quality={70}
-                  priority
-                  className=" max-sm:h-64 h-[35rem] bg-center w-[60rem] max-sm:w-full rounded-md shadow-lg"
-                />
-              </Link>
-            </CarouselItem>
-          );
-        })}
-      </CarouselAutoplay>
-      <ListCards
-        path="/movies/"
-        titleSection="Filmes Populares"
-        data={popularMovies}
-        type="movie"
-      />
-      <ListCards
-        path="/series/"
-        titleSection="Em Alta Agora"
-        data={trendingSeries}
-        type="tv"
-      />
-      <ListCards
-        path="/movies/"
-        titleSection="Filmes Populares no Brasil"
-        data={brazilianPopularMovies}
-        type="movie"
-      />
-      <ListCards
-        path="/series/"
-        titleSection="Séries Melhor Avaliadas"
-        data={TopRatedSeries}
-        type="tv"
-      />
+              <span className="font-semibold max-sm:text-sm">Ver detalhes</span>
+            </Link>
+          </div>
+        </div>
+      
+      </section>
+      <section className=" flex flex-col gap-8 ">
+        <ListCards
+          path="/movies/"
+          titleSection="Filmes Populares"
+          data={popularMovies}
+          type="movie"
+        />
+        <ListCards
+          path="/series/"
+          titleSection="Em Alta Agora"
+          data={trendingSeries}
+          type="tv"
+        />
+        <ListCards
+          path="/movies/"
+          titleSection="Filmes Populares no Brasil"
+          data={brazilianPopularMovies}
+          type="movie"
+        />
+        <ListCards
+          path="/series/"
+          titleSection="Séries Melhor Avaliadas"
+          data={TopRatedSeries}
+          type="tv"
+        />
+      </section>
     </main>
   );
 }
