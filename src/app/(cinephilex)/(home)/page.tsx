@@ -1,4 +1,4 @@
-import { originalImageURL } from "@/lib/imageURLs";
+import { originalImageURL } from "@/utils/imageURLs";
 import {
   getBrazilianPopularMovies,
   getMovieWithHighPopularity,

@@ -1,4 +1,4 @@
-import { resizeImageURL } from "@/lib/imageURLs";
+import { resizeImageURL } from "@/utils/imageURLs";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";

@@ -10,7 +10,7 @@ import ListCards from "@/components/list-cards";
 import Link from "next/link";
 import { Popcorn } from "lucide-react";
 import Image from "next/image";
-import { originalImageURL } from "@/lib/imageURLs";
+import { originalImageURL } from "@/utils/imageURLs";
 
 const genres = {
   action: "28",

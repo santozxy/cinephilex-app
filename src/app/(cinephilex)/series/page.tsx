@@ -8,7 +8,7 @@ import {
 import Image from "next/image";
 import React from "react";
 import ListCards from "@/components/list-cards";
-import { originalImageURL } from "@/lib/imageURLs";
+import { originalImageURL } from "@/utils/imageURLs";
 import Link from "next/link";
 import { Popcorn } from "lucide-react";
 
