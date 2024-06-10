@@ -42,6 +42,7 @@ export default function ListCards({
     }
   }
 
+  const newData = data.results.filter((item) => item.poster_path !== null);
   return (
     <section className="mx-10">
       <TooltipProvider>
@@ -52,7 +53,7 @@ export default function ListCards({
         <div className="flex justify-center">
           <Carousel>
             <CarouselContent className=" py-6">
-              {data.results.map((item) => (
+              {newData.map((item) => (
                 <CarouselItem
                   key={item.id}
                   className="basis-auto rounded-md group relative hover:z-[999]  hover:scale-105 transition-transform duration-500 ease-in-out"
