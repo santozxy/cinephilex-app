@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/carousel";
 import React from "react";
 import Autoplay from "embla-carousel-autoplay";
-import { Film, Popcorn, Tv } from "lucide-react";
+import { User } from "lucide-react";
 
 export function CarouselAutoplay({
   children,
@@ -29,13 +29,14 @@ export function CarouselAutoplay({
   return (
     <div className="flex flex-col mx-10">
       <div className="flex gap-2 items-center">
-        <Popcorn size={24} className="text-primary" />
+        <User size={24} className="text-primary" />
         <h1 className="text-lg font-bold my-6 ">{titleSection}</h1>
       </div>
       <Carousel plugins={[plugin.current]}>
-        <CarouselContent>{children}</CarouselContent>
+        <CarouselContent className="gap-5">{children}</CarouselContent>
         <CarouselPrevious />
         <CarouselNext />
-      </Carousel>    </div>
+      </Carousel>{" "}
+    </div>
   );
 }
