@@ -1,5 +1,18 @@
+import { getMovieById } from "@/service/movies/api";
 import React from "react";
 
-export default function Movie(props: any) {
-  return <div>{JSON.stringify(props)}</div>;
+interface MovieProps {
+  params: {
+    id: string;
+  };
+}
+
+export default async function Movie({ params }: MovieProps) {
+  const movie = await getMovieById(params.id);
+  return (
+    <main>
+      <h1>{movie.title}</h1>
+      
+    </main>
+  );
 }

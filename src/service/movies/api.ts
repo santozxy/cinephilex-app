@@ -11,7 +11,7 @@ export async function getNowPlayingMovies() {
   return data;
 }
 
-export async function getMovieById(id: number) {
+export async function getMovieById(id: string) {
   const response = await api(`/movie/${id}?`, {
     next: {
       revalidate: 60 * 60,
