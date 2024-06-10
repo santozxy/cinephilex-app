@@ -11,6 +11,11 @@ export interface Movie {
   backdrop_path: string;
   genre_ids: number[];
   id: number;
+  tagline: string;
+  genres: {
+    id: number;
+    name: string;
+  }[];
   original_language: string;
   original_title: string;
   overview: string;
@@ -21,4 +26,35 @@ export interface Movie {
   video: boolean;
   vote_average: number;
   vote_count: number;
+}
+
+export interface Credits {
+  id: number;
+  cast: {
+    adult: boolean;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path?: string;
+    cast_id: number;
+    character: string;
+    credit_id: string;
+    order: number;
+  }[];
+  crew: {
+    adult: boolean;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path?: string;
+    credit_id: string;
+    department: string;
+    job: string;
+  }[];
 }

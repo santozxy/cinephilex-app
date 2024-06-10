@@ -1,5 +1,5 @@
 import { api } from "../api";
-import { Movie, MoviesDTO } from "./moviesDTO";
+import { Credits, Movie, MoviesDTO } from "./moviesDTO";
 
 export async function getNowPlayingMovies() {
   const response = await api(`/movie/now_playing?`, {
@@ -89,4 +89,14 @@ export async function getMovieWithHighPopularity() {
   const randomIndex = Math.floor(Math.random() * dataWithOverviews.length);
   const movie = dataWithOverviews[randomIndex];
   return movie;
+}
+
+export async function getCreditsMovie(id: string) {
+  const response = await api(`/movie/${id}/credits?`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data: Credits = await response.json();
+  return data;
 }
