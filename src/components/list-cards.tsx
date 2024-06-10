@@ -17,9 +17,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
+import { SeriesDTO } from "@/service/series/seriesDTO";
+import { All } from "@/service/all/allDTO";
 
 interface CarouselCardsProps {
-  data: MoviesDTO;
+  data: MoviesDTO | SeriesDTO ;
   path: string;
   titleSection: string;
   type: string;
