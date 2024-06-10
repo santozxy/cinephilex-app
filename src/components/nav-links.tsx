@@ -29,8 +29,8 @@ export function NavLinks() {
         }`}
       >
         <div className="flex items-center justify-center gap-3">
-          <Home size={24} className={`text-lg text-primary`} />
-          <p className={`text-lg max-[450px]:hidden`}>Início</p>
+          <Home size={24} className={` text-primary`} />
+          <p className={` max-[450px]:hidden`}>Início</p>
         </div>
       </Link>
 
@@ -41,8 +41,8 @@ export function NavLinks() {
         }`}
       >
         <div className="flex items-center justify-center gap-3">
-          <Film size={24} className={`text-lg text-primary`} />
-          <p className={`text-lg max-[450px]:hidden`}>Filmes</p>
+          <Film size={24} className={` text-primary`} />
+          <p className={` max-[450px]:hidden`}>Filmes</p>
         </div>
       </Link>
 
@@ -53,8 +53,8 @@ export function NavLinks() {
         }`}
       >
         <div className="flex items-center justify-center gap-3">
-          <Tv size={24} className={`text-lg text-primary`} />
-          <p className={`text-lg max-[450px]:hidden`}>Séries</p>
+          <Tv size={24} className={` text-primary`} />
+          <p className={` max-[450px]:hidden`}>TV | Séries</p>
         </div>
       </Link>
       <Link
@@ -64,8 +64,8 @@ export function NavLinks() {
         }`}
       >
         <div className="flex items-center justify-center gap-3">
-          <LucideUsers size={24} className={`text-lg text-primary`} />
-          <p className={`text-lg max-[450px]:hidden`}>Pessoas</p>
+          <LucideUsers size={24} className={` text-primary`} />
+          <p className={` max-[450px]:hidden`}>Pessoas</p>
         </div>
       </Link>
     </nav>

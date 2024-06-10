@@ -18,7 +18,7 @@ export default async function Search({ searchParams }: SearchProps) {
 
   return (
     <div className="flex flex-col">
-      <h1 className="text-2xl font-medium mb-10">
+      <h1 className="text-xl font-medium mb-10">
         Resultado da busca por: <strong> {query}</strong>
       </h1>
       <ListSearchCards data={data} />
