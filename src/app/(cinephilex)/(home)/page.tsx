@@ -11,7 +11,7 @@ import BackdropCard from "@/components/backdrop-card";
 export default async function Home() {
   const popularMovies = await getPopularMovies();
   const brazilianPopularMovies = await getBrazilianPopularMovies();
-  const TopRatedSeries = await getTopRatedSeries();
+  const topRatedSeries = await getTopRatedSeries();
   const trendingSeries = await getTrendingDaySeries();
   const trendingHighPopularity = await getTrendingWithHighPopularityWeek();
   const ListsCards = [
@@ -35,7 +35,7 @@ export default async function Home() {
     },
     {
       title: "Séries Melhor Avaliadas",
-      data: TopRatedSeries,
+      data: topRatedSeries,
       type: "tv",
       path: "/series/",
     },
@@ -43,7 +43,7 @@ export default async function Home() {
 
   return (
     <main className="flex flex-col justify-center items-center">
-      <BackdropCard itemHighPopularity={trendingHighPopularity} />
+      <BackdropCard item={trendingHighPopularity} />
       <section className=" flex flex-col gap-8 ">
         {ListsCards.map((list) => (
           <ListCards

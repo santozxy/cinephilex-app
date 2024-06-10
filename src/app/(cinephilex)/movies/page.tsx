@@ -30,7 +30,7 @@ export default async function Movies() {
 
   return (
     <main className="flex flex-col justify-center items-center">
-      <BackdropCard itemHighPopularity={movieHighPopularity} />
+      <BackdropCard item={movieHighPopularity} />
       {ListsCards.map((list) => (
         <ListCards
           key={list.title}
