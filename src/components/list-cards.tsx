@@ -1,4 +1,4 @@
-import { resizeImageURL } from "@/lib/utils";
+import { resizeImageURL } from "@/lib/imageURLs";
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -41,6 +41,7 @@ export default function ListCards({
       return <User size={24} className="text-primary" />;
     }
   }
+
   return (
     <section className="mx-10">
       <TooltipProvider>
@@ -54,7 +55,7 @@ export default function ListCards({
               {data.results.map((item) => (
                 <CarouselItem
                   key={item.id}
-                  className="basis-auto rounded-md group relative hover:z-[99999]  hover:scale-105 transition-transform duration-500 ease-in-out"
+                  className="basis-auto rounded-md group relative hover:z-[999]  hover:scale-105 transition-transform duration-500 ease-in-out"
                 >
                   <Link href={`${path}/${item.id}`} scroll={false}>
                     <Tooltip delayDuration={100}>
@@ -68,12 +69,12 @@ export default function ListCards({
                           className=" object-center w-[12rem] max-sm:h-48 max-sm:w-36 lg:h-[16rem] rounded-md shadow-xl"
                         />
                       </TooltipTrigger>
-                      <TooltipContent side="right">
-                        <div className="w-[20rem] flex flex-col p-2 max-sm:h-48 max-sm:w-36 lg:h-[15.5rem] rounded-md shadow-xl">
-                          <div className="flex flex-col gap-4">
+                      <TooltipContent side="right" className="z-[9999]">
+                        <div className="w-[20rem] flex flex-col p-2 relative max-sm:h-48 max-sm:w-36 lg:h-[15.5rem] rounded-md shadow-xl">
+                          <div className="flex flex-col gap-4 z-50">
                             <div className="flex items-center justify-between">
-                              <h1 className="text-xl font-semibold font-mono">
-                                {item.title}
+                              <h1 className="text-xl font-extrabold uppercase">
+                                {item.title ?? item.name}
                               </h1>
                               <div className="flex items-center gap-2">
                                 <Star size={22} className="text-yellow-400" />
