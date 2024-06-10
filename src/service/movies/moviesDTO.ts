@@ -7,6 +7,7 @@ export interface MoviesDTO {
 
 export interface Movie {
   adult: boolean;
+  name?: string;
   backdrop_path: string;
   genre_ids: number[];
   id: number;

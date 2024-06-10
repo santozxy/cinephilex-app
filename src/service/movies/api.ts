@@ -85,7 +85,8 @@ export async function getMovieWithHighPopularity() {
     }
   );
   const data: MoviesDTO = await response.json();
-  const randomIndex = Math.floor(Math.random() * data.results.length);
-  const movie = data.results[randomIndex];
+  const dataWithOverviews = data.results.filter((movie) => movie.overview);
+  const randomIndex = Math.floor(Math.random() * dataWithOverviews.length);
+  const movie = dataWithOverviews[randomIndex];
   return movie;
 }
