@@ -41,14 +41,26 @@ export async function getSeriesById(id: number) {
   return data;
 }
 
-export async function getSeriesByGenre(genre: string) {
-  const response = await api(`/discover/tv?with_genres=${genre}`, {
-    next: {
-      revalidate: 60 * 60,
-    },
-  });
+export async function getSeriesByGenre(genre: string, page?: number) {
+  const pagination = page ?? 1;
+  const response = await api(
+    `/discover/tv?with_genres=${genre}&page=${pagination}`,
+    {
+      next: {
+        revalidate: 60 * 60,
+      },
+    }
+  );
   const data: SeriesDTO = await response.json();
-  return data;
+  const seriesWithOverviews = data.results.filter(
+    (serie) => serie.overview.length > 0
+  );
+  const newData = {
+    ...data,
+    results: seriesWithOverviews,
+  };
+
+  return newData;
 }
 
 export async function getSerieWithHighPopularity() {

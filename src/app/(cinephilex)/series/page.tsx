@@ -1,5 +1,4 @@
 import {
-  getPopularSeries,
   getSerieWithHighPopularity,
   getSeriesByGenre,
   getTopRatedSeries,
@@ -11,27 +10,21 @@ import ListCards from "@/components/list-cards";
 import { originalImageURL } from "@/utils/imageURLs";
 import Link from "next/link";
 import { Popcorn } from "lucide-react";
-
-const genres = {
-  action: "28",
-  animation: "16",
-  comedy: "35",
-  crime: "80",
-  mystery: "9648",
-  horror: "27",
-};
+import { genrerListSeries } from "@/utils/genrerList";
 
 export default async function Series() {
   const trendingSeries = await getTrendingDaySeries();
   const topRatedSeries = await getTopRatedSeries();
-  const animationSeries = await getSeriesByGenre(genres.animation);
-  const mysterySeries = await getSeriesByGenre(genres.mystery);
+  const animationSeries = await getSeriesByGenre(genrerListSeries.animation);
+  const mysterySeries = await getSeriesByGenre(genrerListSeries.mystery);
   const serieHighPopularity = await getSerieWithHighPopularity();
-  const comedySeries = await getSeriesByGenre(genres.comedy);
+  const comedySeries = await getSeriesByGenre(genrerListSeries.comedy);
+  const realitySeries = await getSeriesByGenre(genrerListSeries.reality, 2);
 
   const ListsCards = [
     { title: "Comédia", data: comedySeries },
     { title: "Em Alta Agora", data: trendingSeries },
+    { title: "Realitys Shows", data: realitySeries },
     { title: "Mistério", data: mysterySeries },
     { title: "Melhor Avaliados", data: topRatedSeries },
     { title: "Animações", data: animationSeries },
@@ -48,7 +41,6 @@ export default async function Series() {
           alt={serieHighPopularity.title}
           className="object-fill object-center w-full h-full"
         />
-
         <Link className="z-[99]" href={`/movies/${serieHighPopularity.id}`}>
           <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-zinc-900"></div>
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-zinc-900"></div>
