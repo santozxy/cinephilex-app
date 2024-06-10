@@ -1,5 +1,5 @@
 import { api } from "../api";
-import { Credits, Movie, MoviesDTO } from "./moviesDTO";
+import { Credits, DetailsMovie, Movie, MoviesDTO } from "./moviesDTO";
 
 export async function getNowPlayingMovies() {
   const response = await api(`/movie/now_playing?`, {
@@ -17,7 +17,7 @@ export async function getMovieById(id: string) {
       revalidate: 60 * 60,
     },
   });
-  const data: Movie = await response.json();
+  const data: DetailsMovie = await response.json();
   return data;
 }
 

@@ -24,13 +24,13 @@ interface ListCastProps {
 }
 export default function ListCast({ data, path = "/persons" }: ListCastProps) {
   return (
-    <section className="mx-10">
+    <section >
       <TooltipProvider>
         <div className="flex gap-2 items-center">
           <Users size={24} className="text-primary" />
           <h1 className="text-lg font-semibold ">Elenco</h1>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center mx-10">
           <Carousel opts={{ slidesToScroll: 2 }}>
             <CarouselContent className=" py-6">
               {data.map((item) => (
