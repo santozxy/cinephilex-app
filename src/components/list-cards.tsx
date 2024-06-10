@@ -51,16 +51,16 @@ export default function ListCards({
           <h1 className="text-lg font-semibold ">{titleSection}</h1>
         </div>
         <div className="flex justify-center">
-          <Carousel>
+          <Carousel opts={{ slidesToScroll: 2 }}>
             <CarouselContent className=" py-6">
               {newData.map((item) => (
                 <CarouselItem
                   key={item.id}
                   className="basis-auto rounded-md group relative hover:z-[999]  hover:scale-105 transition-transform duration-500 ease-in-out"
                 >
-                  <Link href={`${path}/${item.id}`} scroll={false}>
-                    <Tooltip delayDuration={100}>
-                      <TooltipTrigger>
+                  <Tooltip delayDuration={100}>
+                    <TooltipTrigger>
+                      <Link href={`${path}/${item.id}`} scroll={false}>
                         <Image
                           priority={true}
                           src={`${resizeImageURL}${item.poster_path}`}
@@ -69,37 +69,37 @@ export default function ListCards({
                           height={272}
                           className=" object-center w-[12rem] max-sm:h-48 max-sm:w-36 lg:h-[16rem] rounded-md shadow-xl"
                         />
-                      </TooltipTrigger>
-                      <TooltipContent side="right" className="z-[9999]">
-                        <div className="w-[20rem] flex flex-col p-2 relative max-sm:h-48 max-sm:w-36 lg:h-[15.5rem] rounded-md shadow-xl">
-                          <div className="flex flex-col gap-4 z-50">
-                            <div className="flex items-center justify-between">
-                              <h1 className="text-xl font-extrabold uppercase">
-                                {item.title ?? item.name}
-                              </h1>
-                              <div className="flex items-center gap-2">
-                                <Star size={22} className="text-yellow-400" />
-                                <span className="text-lg text-center ">
-                                  {item.vote_average?.toFixed(1)}
-                                </span>
-                              </div>
-                            </div>
-                            <p className="text-zinc-300 text-justify max-sm:hidden">
-                              {item.overview.slice(0, 202) + "..."}
-                            </p>
-                            <Link
-                              href={`${path}/${item.id}`}
-                              className="bg-primary bg-opacity-50 duration-300 ease-in-out rounded-full max-sm:p-1 p-1.5 flex justify-center items-center hover:bg-opacity-80 w-56 max-sm:hidden shadow-lg"
-                            >
-                              <span className="font-semibold max-sm:text-sm">
-                                Ver detalhes
+                      </Link>
+                    </TooltipTrigger>
+                    <TooltipContent side="right" className="z-[9999] -mx-2">
+                      <div className="w-[20rem] flex flex-col p-2 relative max-sm:h-48 max-sm:w-36 lg:h-[15.4rem] rounded-md shadow-xl">
+                        <div className="flex flex-col gap-4 z-50">
+                          <div className="flex items-center justify-between">
+                            <h1 className="text-xl font-extrabold uppercase">
+                              {item.title ?? item.name}
+                            </h1>
+                            <div className="flex items-center gap-2">
+                              <Star size={22} className="text-yellow-400" />
+                              <span className="text-lg text-center ">
+                                {item.vote_average?.toFixed(1)}
                               </span>
-                            </Link>
+                            </div>
                           </div>
+                          <p className="text-zinc-300 text-justify max-sm:hidden">
+                            {item.overview.slice(0, 202) + "..."}
+                          </p>
+                          <Link
+                            href={`${path}/${item.id}`}
+                            className="bg-primary bg-opacity-50 duration-300 ease-in-out rounded-full max-sm:p-1 p-1.5 flex justify-center items-center hover:bg-opacity-80 w-56 max-sm:hidden shadow-lg"
+                          >
+                            <span className="font-semibold max-sm:text-sm">
+                              Ver detalhes
+                            </span>
+                          </Link>
                         </div>
-                      </TooltipContent>
-                    </Tooltip>
-                  </Link>
+                      </div>
+                    </TooltipContent>
+                  </Tooltip>
 
                   <div className=" absolute top-4 left-3 rounded-sm p-1 w-14 bg-primary bg-opacity-85  text-center">
                     <div className="flex items-center gap-2">
