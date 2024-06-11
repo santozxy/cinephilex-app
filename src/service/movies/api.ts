@@ -112,6 +112,19 @@ export async function getSimilarsMovie(id: string) {
   return data;
 }
 
+export async function getRecommendationsMovie(id: string) {
+  const response = await api(
+    `/movie/${id}/recommendations?include_adult=false`,
+    {
+      next: {
+        revalidate: 60 * 60,
+      },
+    }
+  );
+  const data: MoviesDTO = await response.json();
+  return data;
+}
+
 export async function getReviewsMovie(id: string) {
   const response = await api(`/movie/${id}/reviews?language=`, {
     next: {

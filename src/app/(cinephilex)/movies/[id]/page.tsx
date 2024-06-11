@@ -3,6 +3,7 @@ import { ListCredits } from "@/components/list-credits";
 import {
   getCreditsMovie,
   getMovieById,
+  getRecommendationsMovie,
   getSimilarsMovie,
   getVideosMovie,
 } from "@/service/movies/api";
@@ -35,6 +36,7 @@ export default async function Movie({ params }: MovieProps) {
   const movie = await getMovieById(params.id);
   const credits = await getCreditsMovie(params.id);
   const similars = await getSimilarsMovie(params.id);
+  const recommendations = await getRecommendationsMovie(params.id);
   const movieVideos = await getVideosMovie(params.id);
   const cast = credits.cast;
   const crew = Array.from(
@@ -130,7 +132,7 @@ export default async function Movie({ params }: MovieProps) {
 
             <ListCards
               titleSection="Talvez você goste de:"
-              data={similars}
+              data={recommendations}
               path="/movies"
               type="movie"
             />

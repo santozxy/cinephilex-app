@@ -77,7 +77,7 @@ export function ListCards({
                       <div className="w-[20rem] flex flex-col p-2 relative max-sm:h-48 max-sm:w-36 lg:h-[15.4rem] rounded-md shadow-xl">
                         <div className="flex flex-col gap-4 z-50">
                           <div className="flex items-center justify-between">
-                            <h1 className="text-lg font-extrabold uppercase">
+                            <h1 className="font-extrabold uppercase">
                               {item.title ?? item.name}
                             </h1>
                             <div className="flex items-center gap-2">
@@ -88,7 +88,7 @@ export function ListCards({
                             </div>
                           </div>
                           <p className="text-zinc-300 text-justify max-sm:hidden">
-                            {item.overview.slice(0, 202) + "..."}
+                            {item.overview.slice(0, 200) + "..."}
                           </p>
                           <Link
                             href={`${path}/${item.id}`}
