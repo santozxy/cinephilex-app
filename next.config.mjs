@@ -1,5 +1,3 @@
-
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -7,6 +5,11 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "image.tmdb.org",
+        pathname: "/t/p/w200/*",
+      },
       {
         protocol: "https",
         hostname: "image.tmdb.org",

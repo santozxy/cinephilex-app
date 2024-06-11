@@ -4,7 +4,8 @@ export const envSchema = z.object({
   NEXT_PUBLIC_API_BASE_URL: z.string().url(),
   NEXT_PUBLIC_API_KEY: z.string(),
   NEXT_PUBLIC_IMG_BASE_URL: z.string().url(),
-  NEXT_PUBLIC_IMG_JPG_BASE_URL: z.string().url(),
+  NEXT_PUBLIC_IMG_500_BASE_URL: z.string().url(),
+  NEXT_PUBLIC_IMG_200_BASE_URL: z.string().url(),
 });
 
 const parsedEnv = envSchema.safeParse(process.env);
