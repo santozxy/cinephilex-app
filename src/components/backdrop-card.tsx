@@ -1,3 +1,4 @@
+import { All } from "@/service/all/allDTO";
 import { originalImageURL } from "@/utils/imageURLs";
 import { Popcorn } from "lucide-react";
 import Image from "next/image";
@@ -5,16 +6,34 @@ import Link from "next/link";
 import React from "react";
 interface BackdropCardProps {
   showCardInfo?: boolean;
+  path?: string;
   item: {
     title?: string;
     name?: string;
     backdrop_path: string;
     overview: string;
     id: number;
+    media_type?: string;
   };
 }
 
-export function BackdropCard({ item, showCardInfo = true }: BackdropCardProps) {
+function generateLink(item: BackdropCardProps["item"]) {
+  if (item.media_type === "movie") {
+    return `/movies/${item.id}`;
+  }
+  if (item.media_type === "tv") {
+    return `/series/${item.id}`;
+  }
+  if (item.media_type === "person") {
+    return `/persons/${item.id}`;
+  }
+  return "";
+}
+export function BackdropCard({
+  item,
+  showCardInfo = true,
+  path,
+}: BackdropCardProps) {
   return (
     <section className="w-full h-[40rem] max-sm:h-64 relative">
       <Image
@@ -26,7 +45,10 @@ export function BackdropCard({ item, showCardInfo = true }: BackdropCardProps) {
         className="object-fill object-center w-full h-full"
       />
 
-      <Link className="z-[99]" href={`/movies/${item.id}`}>
+      <Link
+        className="z-[99]"
+        href={path ? `${path}${item.id}` : generateLink(item)}
+      >
         <div className="absolute inset-0 bg-gradient-to-t from-transparent via-transparent to-zinc-900"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-zinc-900"></div>
         <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-zinc-900"></div>
@@ -47,7 +69,7 @@ export function BackdropCard({ item, showCardInfo = true }: BackdropCardProps) {
             </p>
             <Link
               className="bg-primary bg-opacity-50 duration-300 ease-in-out rounded-full max-sm:p-1 p-1.5 flex justify-center items-center hover:bg-opacity-80 w-56 max-sm:hidden shadow-lg"
-              href={`/movies/${item.id}`}
+              href={path ? `${path}${item.id}` : generateLink(item)}
             >
               <span className="font-semibold max-sm:text-sm">Ver detalhes</span>
             </Link>
