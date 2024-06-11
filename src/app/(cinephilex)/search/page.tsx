@@ -17,8 +17,8 @@ export default async function Search({ searchParams }: SearchProps) {
   const data: SearchDTO = await searchProducts(query);
 
   return (
-    <div className="flex flex-col">
-      <h1 className="text-xl font-medium mb-10">
+    <div className="flex flex-col items-center">
+      <h1 className="text-xl text-left font-medium my-6">
         Resultado da busca por: <strong> {query}</strong>
       </h1>
       <ListSearchCards data={data} />
