@@ -27,3 +27,41 @@ export interface AllDTO {
     origin_country?: string[]
   }
   
+
+  export interface Reviews {
+    id: number;
+    page: number;
+    results: {
+      author: string;
+      author_details: {
+        name: string;
+        username: string;
+        avatar_path: string;
+        rating: number;
+      };
+      content: string;
+      created_at: string;
+      id: string;
+      updated_at: string;
+      url: string;
+    }[];
+    total_pages: number;
+    total_results: number;
+  }
+  
+  export interface Videos {
+    id: number;
+    results: {
+      iso_639_1: string;
+      iso_3166_1: string;
+      name: string;
+      key: string;
+      site: string;
+      size: number;
+      type: string;
+      official: boolean;
+      published_at: string;
+      id: string;
+    }[];
+  }
+  

@@ -1,5 +1,6 @@
+import { Reviews, Videos } from "../all/allDTO";
 import { api } from "../api";
-import { Credits, DetailsMovie, Movie, MoviesDTO } from "./moviesDTO";
+import { Credits, DetailsMovie, MoviesDTO } from "./moviesDTO";
 
 export async function getNowPlayingMovies() {
   const response = await api(`/movie/now_playing?`, {
@@ -8,16 +9,6 @@ export async function getNowPlayingMovies() {
     },
   });
   const data: MoviesDTO = await response.json();
-  return data;
-}
-
-export async function getMovieById(id: string) {
-  const response = await api(`/movie/${id}?`, {
-    next: {
-      revalidate: 60 * 60,
-    },
-  });
-  const data: DetailsMovie = await response.json();
   return data;
 }
 
@@ -99,4 +90,49 @@ export async function getCreditsMovie(id: string) {
   });
   const data: Credits = await response.json();
   return data;
+}
+
+export async function getMovieById(id: string) {
+  const response = await api(`/movie/${id}?`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data: DetailsMovie = await response.json();
+  return data;
+}
+
+export async function getSimilarsMovie(id: string) {
+  const response = await api(`/movie/${id}/similar?`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data: MoviesDTO = await response.json();
+  return data;
+}
+
+export async function getReviewsMovie(id: string) {
+  const response = await api(`/movie/${id}/reviews?language=`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data: Reviews = await response.json();
+  return data;
+}
+
+export async function getVideosMovie(id: string) {
+  const response = await api(`/movie/${id}/videos?language=`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data: Videos = await response.json();
+  const videos = data.results.filter(
+    (video) => video.type === "Trailer" && video.site === "YouTube"
+  );
+  const videosBR = videos.filter((video) => video.iso_3166_1 === "BR");
+  console.log(videosBR);
+  return videos;
 }
