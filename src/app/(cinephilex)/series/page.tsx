@@ -30,7 +30,7 @@ export default async function Series() {
 
   return (
     <main className="flex flex-col justify-center items-center">
-      <BackdropCard item={serieHighPopularity} />
+      <BackdropCard item={serieHighPopularity}  path="/series/"/>
       {ListsCards.map((list) => (
         <ListCards
           key={list.title}
