@@ -4,14 +4,11 @@ import {
   getTopRatedSeries,
   getTrendingDaySeries,
 } from "@/service/series/api";
-import Image from "next/image";
+
 import React from "react";
-import ListCards from "@/components/list-cards";
-import { originalImageURL } from "@/utils/imageURLs";
-import Link from "next/link";
-import { Popcorn } from "lucide-react";
+import {ListCards} from "@/components/list-cards";
 import { genrerListSeries } from "@/utils/genrerList";
-import BackdropCard from "@/components/backdrop-card";
+import {BackdropCard} from "@/components/backdrop-card";
 
 export default async function Series() {
   const trendingSeries = await getTrendingDaySeries();

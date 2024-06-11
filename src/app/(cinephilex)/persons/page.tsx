@@ -1,18 +1,12 @@
 import { CarouselAutoplay } from "@/components/carousel-autoplay";
-import ListCards from "@/components/list-cards";
 import ListCardsPersons from "@/components/list-cards-persons";
-import { ListSearchCards } from "@/components/list-search-cards";
 import { CarouselItem } from "@/components/ui/carousel";
-import { MoviesDTO } from "@/service/movies/moviesDTO";
 import {
   getPopularPersons,
   getPersonTrendingDay,
   getPersonTrendingWeek,
 } from "@/service/persons/api";
-import { Person } from "@/service/persons/personsDTO";
-import { Result } from "@/service/search/searchDTO";
 import { resizeImageURL } from "@/utils/imageURLs";
-import { BriefcaseBusiness } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
