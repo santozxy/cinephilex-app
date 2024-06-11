@@ -1,12 +1,22 @@
-import BackdropCard from "@/components/backdrop-card";
-import ListCast from "@/components/list-cast";
-import { getCreditsMovie, getMovieById } from "@/service/movies/api";
+import { BackdropCard } from "@/components/backdrop-card";
+import { ListCredits } from "@/components/list-credits";
+import {
+  getCreditsMovie,
+  getMovieById,
+  getSimilarsMovie,
+  getVideosMovie,
+} from "@/service/movies/api";
 import { resizeImageURL } from "@/utils/imageURLs";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import { format } from "date-fns";
-import RatingStar from "@/components/rating-star";
+import { RatingStar } from "@/components/rating-star";
+import { Text, Video } from "lucide-react";
+import { Metadata } from "next";
+import { ListCards } from "@/components/list-cards";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ListMovieReviews from "@/components/list-movie-reviews";
+import { ListClips } from "@/components/list-clips";
 
 interface MovieProps {
   params: {
@@ -14,28 +24,43 @@ interface MovieProps {
   };
 }
 
+export async function generateMetadata({
+  params,
+}: MovieProps): Promise<Metadata> {
+  const movie = await getMovieById(params.id);
+  return { title: `${movie.title} | devstore` };
+}
+
 export default async function Movie({ params }: MovieProps) {
   const movie = await getMovieById(params.id);
   const credits = await getCreditsMovie(params.id);
-  const cast = credits.cast.filter((item) => item.profile_path !== null);
+  const similars = await getSimilarsMovie(params.id);
+  const movieVideos = await getVideosMovie(params.id);
+  const cast = credits.cast;
+  const crew = Array.from(
+    new Map(credits.crew.map((item) => [item.id, item])).values()
+  );
   return (
-    <main className="flex flex-col relative mt-6">
-      <section className="sticky top-20 -z-50 opacity-45">
+    <main className="flex flex-col mt-6">
+      <section className="fixed w-full -z-50 opacity-45">
         <BackdropCard item={movie} showCardInfo={false} />
       </section>
-      <section className="grid grid-cols-[14rem_1fr] gap-8 absolute">
-        <div className="flex flex-col items-center p-2 gap-2 shadow-lg shadow-black/30 rounded-lg">
-          <Image
-            src={`${resizeImageURL}${movie.poster_path}`}
-            alt={movie.title}
-            width={208}
-            height={312}
-            objectFit="cover"
-            className="rounded-md w-[12rem] h-[17.5rem]"
-          />
+      <section className="grid sm:grid-cols-[14rem_1fr] grid-cols-1 gap-8">
+        <div className="flex flex-col p-2 gap-2 shadow-lg  shadow-black/30 rounded-lg">
+          <h1 className="text-xl text-center font-bold">{movie.title}</h1>
+          <div className="flex flex-col items-center">
+            <Image
+              src={`${resizeImageURL}${movie.poster_path}`}
+              alt={movie.title}
+              width={208}
+              height={312}
+              objectFit="cover"
+              className="rounded-md w-[12rem] h-[17.5rem]"
+            />
+          </div>
           <div className="flex flex-col gap-4 p-2">
             <RatingStar rating={movie.vote_average} />
-            <div className="flex gap-4 flex-wrap items-center">
+            <div className="flex gap-2 flex-wrap items-center">
               {movie.genres.map((genre) => (
                 <span
                   className="bg-primary/90 p-1.5 rounded-full text-sm"
@@ -63,20 +88,61 @@ export default async function Movie({ params }: MovieProps) {
               <span className="text-zinc-50">{movie.runtime} min</span>
             </div>
           </div>
+
+          <hr className="w-full border-t-2 border-zinc-800" />
+          <div className="flex-col flex gap-2 ">
+            <h1 className="font-semibold">Produzido por:</h1>
+            <div className="flex flex-wrap gap-2 items-center">
+              {movie.production_companies.map((company) => (
+                <Image
+                  key={company.id}
+                  src={`${resizeImageURL}${company.logo_path ?? "/notFound"}`}
+                  alt={company.name}
+                  width={64}
+                  height={40}
+                  className="object-contain w-16 h-10 p-2 bg-zinc-800 shadow-lg rounded-md"
+                />
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <div className="flex items-center gap-2 p-2 rounded-lg">
-            <h1 className="text-xl font-bold">{movie.title}</h1>
-          </div>
+        <Tabs
+          defaultValue="movie"
+          className="flex flex-col shadow-lg shadow-black/30"
+        >
+          <TabsList className="grid grid-cols-3">
+            <TabsTrigger value="movie">Filme</TabsTrigger>
+            <TabsTrigger value="credits">Créditos</TabsTrigger>
+            <TabsTrigger value="reviews">Reviews</TabsTrigger>
+          </TabsList>
+          <TabsContent value="movie" className="flex flex-col gap-2 p-3">
+            <div className="flex flex-col gap-8">
+              <div className="flex flex-col rounded-lg">
+                <div className="flex items-center gap-2 rounded-lg">
+                  <Text size={24} className="text-primary" />
+                  <h1 className="text-lg font-semibold">Sinopse</h1>
+                </div>
+                <span>{movie.overview}</span>
+              </div>
+              {movieVideos && <ListClips data={movieVideos} />}
+            </div>
 
-          <div className="flex flex-col p-2 rounded-lg">
-            <span className="text-lg font-semibold">Descrição:</span>
-            <span>{movie.overview}</span>
-          </div>
-
-          <ListCast data={cast} path="/persons" />
-        </div>
+            <ListCards
+              titleSection="Talvez você goste de:"
+              data={similars}
+              path="/movies"
+              type="movie"
+            />
+          </TabsContent>
+          <TabsContent value="credits" className="flex flex-col gap-2 p-3">
+            <ListCredits title="Atores" data={cast} path="/persons" />
+            <ListCredits title="Equipe" data={crew} path="/persons" />
+          </TabsContent>
+          <TabsContent value="reviews" className="flex flex-col gap-2 p-3">
+            <ListMovieReviews params={{ id: String(movie.id) }} />
+          </TabsContent>
+        </Tabs>
       </section>
     </main>
   );
