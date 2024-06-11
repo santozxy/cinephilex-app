@@ -18,7 +18,7 @@ import {
   TooltipTrigger,
 } from "./ui/tooltip";
 import { SeriesDTO } from "@/service/series/seriesDTO";
-import { All } from "@/service/all/allDTO";
+
 
 interface CarouselCardsProps {
   data: MoviesDTO | SeriesDTO ;
@@ -26,7 +26,7 @@ interface CarouselCardsProps {
   titleSection: string;
   type: string;
 }
-export default function ListCards({
+export function ListCards({
   data,
   path,
   titleSection,
@@ -46,7 +46,7 @@ export default function ListCards({
 
   const newData = data.results.filter((item) => item.poster_path !== null);
   return (
-    <section className="mx-10">
+    <section>
       <TooltipProvider>
         <div className="flex gap-2 items-center">
           {generateIconType(type)}
@@ -77,7 +77,7 @@ export default function ListCards({
                       <div className="w-[20rem] flex flex-col p-2 relative max-sm:h-48 max-sm:w-36 lg:h-[15.4rem] rounded-md shadow-xl">
                         <div className="flex flex-col gap-4 z-50">
                           <div className="flex items-center justify-between">
-                            <h1 className="text-xl font-extrabold uppercase">
+                            <h1 className="text-lg font-extrabold uppercase">
                               {item.title ?? item.name}
                             </h1>
                             <div className="flex items-center gap-2">

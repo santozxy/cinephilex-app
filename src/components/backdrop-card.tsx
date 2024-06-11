@@ -14,10 +14,7 @@ interface BackdropCardProps {
   };
 }
 
-export default function BackdropCard({
-  item,
-  showCardInfo = true,
-}: BackdropCardProps) {
+export function BackdropCard({ item, showCardInfo = true }: BackdropCardProps) {
   return (
     <section className="w-full h-[40rem] max-sm:h-64 relative">
       <Image

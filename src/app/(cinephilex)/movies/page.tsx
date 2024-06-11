@@ -5,8 +5,8 @@ import {
   getTrendingDayMovies,
 } from "@/service/movies/api";
 import React from "react";
-import ListCards from "@/components/list-cards";
-import BackdropCard from "@/components/backdrop-card";
+import {ListCards} from "@/components/list-cards";
+import {BackdropCard} from "@/components/backdrop-card";
 import { genrerListMovies } from "@/utils/genrerList";
 
 export default async function Movies() {

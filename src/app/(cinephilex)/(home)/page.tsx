@@ -3,10 +3,10 @@ import {
   getPopularMovies,
 } from "@/service/movies/api";
 import React from "react";
-import ListCards from "@/components/list-cards";
+import { ListCards } from "@/components/list-cards";
 import { getTopRatedSeries, getTrendingDaySeries } from "@/service/series/api";
 import { getTrendingWithHighPopularityWeek } from "@/service/all/api";
-import BackdropCard from "@/components/backdrop-card";
+import { BackdropCard } from "@/components/backdrop-card";
 
 export default async function Home() {
   const popularMovies = await getPopularMovies();
