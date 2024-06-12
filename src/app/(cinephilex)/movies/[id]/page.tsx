@@ -4,7 +4,7 @@ import {
   getCreditsMovie,
   getMovieById,
   getRecommendationsMovie,
-  getSimilarsMovie,
+  getTranslationsMovie,
   getVideosMovie,
 } from "@/service/movies/api";
 import { resizeImageURL } from "@/utils/imageURLs";
@@ -12,12 +12,13 @@ import Image from "next/image";
 import React from "react";
 import { format } from "date-fns";
 import { RatingStar } from "@/components/rating-star";
-import { Text, Video } from "lucide-react";
+import { Text } from "lucide-react";
 import { Metadata } from "next";
 import { ListCards } from "@/components/list-cards";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ListMovieReviews from "@/components/list-movie-reviews";
 import { ListClips } from "@/components/list-clips";
+import ListTransitions from "@/components/list-translation";
 
 interface MovieProps {
   params: {
@@ -29,13 +30,13 @@ export async function generateMetadata({
   params,
 }: MovieProps): Promise<Metadata> {
   const movie = await getMovieById(params.id);
-  return { title: `${movie.title} | devstore` };
+  return { title: `${movie.title}` };
 }
 
 export default async function Movie({ params }: MovieProps) {
   const movie = await getMovieById(params.id);
   const credits = await getCreditsMovie(params.id);
-  const similars = await getSimilarsMovie(params.id);
+  const translations = await getTranslationsMovie(params.id);
   const recommendations = await getRecommendationsMovie(params.id);
   const movieVideos = await getVideosMovie(params.id);
   const cast = credits.cast;
@@ -44,7 +45,7 @@ export default async function Movie({ params }: MovieProps) {
   );
   return (
     <main className="flex flex-col mt-6">
-      <section className="fixed w-full -z-50 opacity-45">
+      <section className="fixed w-full  -z-50 opacity-45">
         <BackdropCard item={movie} showCardInfo={false} />
       </section>
       <section className="grid sm:grid-cols-[14rem_1fr] grid-cols-1 gap-8">
@@ -120,22 +121,24 @@ export default async function Movie({ params }: MovieProps) {
           </TabsList>
           <TabsContent value="movie" className="flex flex-col gap-2 p-3">
             <div className="flex flex-col gap-8">
-              <div className="flex flex-col rounded-lg">
+              <div className="flex flex-col gap-3 rounded-lg">
                 <div className="flex items-center gap-2 rounded-lg">
                   <Text size={24} className="text-primary" />
                   <h1 className="text-lg font-semibold">Sinopse</h1>
                 </div>
                 <span>{movie.overview}</span>
               </div>
+              <ListTransitions data={translations} />
               {movieVideos && <ListClips data={movieVideos} />}
             </div>
-
-            <ListCards
-              titleSection="Talvez você goste de:"
-              data={recommendations}
-              path="/movies"
-              type="movie"
-            />
+            {recommendations.results.length > 0 && (
+              <ListCards
+                titleSection="Recomendações"
+                data={recommendations}
+                path="/movies"
+                type="movie"
+              />
+            )}
           </TabsContent>
           <TabsContent value="credits" className="flex flex-col gap-2 p-3">
             <ListCredits title="Atores" data={cast} path="/persons" />

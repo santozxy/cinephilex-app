@@ -1,4 +1,4 @@
-import { Reviews, Videos } from "../all/allDTO";
+import { Reviews, Translations, Videos } from "../all/allDTO";
 import { api } from "../api";
 import { Credits, DetailsMovie, MoviesDTO } from "./moviesDTO";
 
@@ -148,4 +148,24 @@ export async function getVideosMovie(id: string) {
   const videosBR = videos.filter((video) => video.iso_3166_1 === "BR");
   console.log(videosBR);
   return videos;
+}
+
+export async function getWacthProvidersMovie(id: string) {
+  const response = await api(`/movie/${id}/watch/providers?`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data = await response.json();
+  return data;
+}
+
+export async function getTranslationsMovie(id: string) {
+  const response = await api(`/movie/${id}/translations?`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data: Translations = await response.json();
+  return data;
 }
