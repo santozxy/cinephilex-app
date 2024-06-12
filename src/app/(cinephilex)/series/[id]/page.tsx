@@ -62,13 +62,22 @@ export default async function Serie({ params }: { params: { id: string } }) {
               </div>
             )}
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 p-2">
             <RatingStar rating={serie.vote_average} />
-           
+            <div className="flex gap-2 flex-wrap items-center">
+              {serie.genres.map((genre) => (
+                <span
+                  className="bg-primary/90 p-2 rounded-lg text-sm"
+                  key={genre.id}
+                >
+                  {genre.name}
+                </span>
+              ))}
+            </div>
           </div>
           <hr className="w-full border-t-2 border-zinc-800" />
           {watchProviders && (
-            <div className="flex flex-col gap-4 ">
+            <div className="flex flex-col gap-4 p-2">
               {watchProviders.buy && (
                 <div className="flex-col flex gap-2 ">
                   <h1 className="font-semibold">Onde comprar:</h1>
@@ -103,7 +112,6 @@ export default async function Serie({ params }: { params: { id: string } }) {
                   </div>
                 </div>
               )}
-              <hr className="w-full border-t-2 border-zinc-800" />
             </div>
           )}
 
@@ -131,7 +139,7 @@ export default async function Serie({ params }: { params: { id: string } }) {
           className="flex flex-col shadow-lg shadow-black/30"
         >
           <TabsList className="grid grid-cols-3">
-            <TabsTrigger value="serie">Série</TabsTrigger>
+            <TabsTrigger value="serie">Filme</TabsTrigger>
             <TabsTrigger value="credits">Créditos</TabsTrigger>
             <TabsTrigger value="reviews">Reviews</TabsTrigger>
           </TabsList>
