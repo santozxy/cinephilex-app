@@ -13,7 +13,21 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface ListCreditsProps {
-  data: Credits["cast"] | Credits["crew"];
+  data: {
+    adult: boolean;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path?: string;
+    credit_id?: string;
+    department?: string;
+    job?: string;
+    cast_id?: number;
+    character?: string;
+  }[];
   path: string;
   title: string;
 }
@@ -22,6 +36,7 @@ export function ListCredits({
   path = "/persons",
   title,
 }: ListCreditsProps) {
+  
   return (
     <section>
       <div className="flex gap-2 items-center">
@@ -40,22 +55,28 @@ export function ListCredits({
                   {item.profile_path ? (
                     <Image
                       priority
-                      fetchPriority="high"
                       src={`${resizeImageURL}${item.profile_path}`}
                       alt={item.name ?? ""}
-                      width={192}
-                      height={272}
+                      width={112}
+                      height={160}
                       className=" object-center rounded-md shadow-xl w-[7rem] h-[10rem]"
                     />
                   ) : (
-                    <div className="bg-zinc-800 w-[7rem] h-[10rem] rounded-md flex justify-center items-center">
+                    <div className="bg-zinc-800/80 w-[7rem] h-[10rem] rounded-md flex justify-center items-center">
                       <User size={32} className="text-primary" />
                     </div>
                   )}
                 </Link>
-                <span className="absolute bottom-0 text-sm bg-zinc-900/60 shadow-lg shadow-black/30 text-nowrap p-1 ">
-                  {item.name.slice(0, 12) + "..."}
-                </span>
+                <div className="absolute top-0 text-xs bg-zinc-900/60 shadow-lg shadow-black/30 rounded-br-md p-1 ">
+                  <span>{item.character || item.known_for_department}</span>
+                </div>
+                <div className="absolute bottom-0 text-xs bg-zinc-900/60 shadow-lg shadow-black/30 rounded-tr-md text-nowrap p-1 ">
+                  <span>
+                    {item.name.length > 15
+                      ? item.name.slice(0, 15) + "..."
+                      : item.name}{" "}
+                  </span>
+                </div>
               </CarouselItem>
             ))}
           </CarouselContent>

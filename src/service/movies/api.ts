@@ -1,4 +1,4 @@
-import { Reviews, Translations, Videos } from "../all/allDTO";
+import { Reviews, Translations, Videos, WatchProviders } from "../all/allDTO";
 import { api } from "../api";
 import { Credits, DetailsMovie, MoviesDTO } from "./moviesDTO";
 
@@ -168,4 +168,24 @@ export async function getTranslationsMovie(id: string) {
   });
   const data: Translations = await response.json();
   return data;
+}
+
+export async function getImagesMovie(id: string) {
+  const response = await api(`/movie/${id}/images?include_image_language=pt`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data = await response.json();
+  return data;
+}
+
+export async function getWatchMovieProviders(id: string) {
+  const response = await api(`/movie/${id}/watch/providers?language=`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data: WatchProviders = await response.json();
+  return data.results.BR;
 }

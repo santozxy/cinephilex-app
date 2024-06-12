@@ -45,7 +45,7 @@ export function ListCards({
 
   const newData = data.results.filter(
     (item) =>
-      item.poster_path !== null && !item.title?.toLowerCase().includes("porno")
+      item.poster_path !== null && !item.title?.toLowerCase().includes("porno") && !item.title?.toLowerCase().includes("japanese")
   );
   return (
     <section>

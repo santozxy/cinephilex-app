@@ -7,7 +7,7 @@ export function RatingStar({ rating }: { rating: number }) {
   const halfStar = (rating / 10) * totalStars - filledStars >= 0.5;
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center gap-3">
       <div className="flex items-center gap-0.5">
         {[...Array(filledStars)].map((_, index) => (
           <Star key={index} className="h-6 w-6 text-yellow-400" />
