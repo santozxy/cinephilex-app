@@ -36,14 +36,16 @@ export function BackdropCard({
 }: BackdropCardProps) {
   return (
     <section className="w-[90%] h-[40rem] max-sm:h-64 relative">
-      <Image
-        priority
-        src={originalImageURL + item.backdrop_path}
-        width={1280}
-        height={720}
-        alt={item.title || item.name || "Sem título"}
-        className="object-fill object-center w-full h-full"
-      />
+      {item.backdrop_path && (
+        <Image
+          priority
+          src={originalImageURL + item.backdrop_path}
+          width={1280}
+          height={720}
+          alt={item.title || item.name || "Sem título"}
+          className="object-fill object-center w-full h-full"
+        />
+      )}
 
       <Link
         className="z-[99]"
