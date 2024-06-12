@@ -87,6 +87,7 @@ export default async function Movie({ params }: MovieProps) {
                 </span>
               ))}
             </div>
+            <hr className="w-full border-t-2 border-zinc-800" />
             {watchProviders && (
               <div className="flex flex-col gap-4 p-2">
                 {watchProviders.buy && (
@@ -125,6 +126,7 @@ export default async function Movie({ params }: MovieProps) {
                 )}
               </div>
             )}
+
             <div className="flex flex-wrap gap-1 items-center">
               <span className="text-primary font-semibold">Orçamento:</span>
               <span className="text-zinc-50">
