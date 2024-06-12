@@ -7,7 +7,7 @@ interface ListTransitionsProps {
   data: Translations;
 }
 
-export default async function ListTransitions({ data }: ListTransitionsProps) {
+export function ListTransitions({ data }: ListTransitionsProps) {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex gap-2 items-center">
