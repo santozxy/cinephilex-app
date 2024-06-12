@@ -19,9 +19,8 @@ import {
 } from "./ui/tooltip";
 import { SeriesDTO } from "@/service/series/seriesDTO";
 
-
 interface CarouselCardsProps {
-  data: MoviesDTO | SeriesDTO ;
+  data: MoviesDTO | SeriesDTO;
   path: string;
   titleSection: string;
   type: string;
@@ -44,7 +43,10 @@ export function ListCards({
     }
   }
 
-  const newData = data.results.filter((item) => item.poster_path !== null);
+  const newData = data.results.filter(
+    (item) =>
+      item.poster_path !== null && !item.title?.toLowerCase().includes("porno")
+  );
   return (
     <section>
       <TooltipProvider>
