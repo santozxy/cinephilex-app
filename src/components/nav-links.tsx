@@ -57,17 +57,6 @@ export function NavLinks() {
           <p className={` max-[450px]:hidden`}>TV | Séries</p>
         </div>
       </Link>
-      <Link
-        href="/persons"
-        className={`py-2 no-underline hover:text-primary duration-300 ${
-          path === "/persons" ? "text-primary" : ""
-        }`}
-      >
-        <div className="flex items-center justify-center gap-3">
-          <LucideUsers size={24} className={` text-primary`} />
-          <p className={` max-[450px]:hidden`}>Pessoas</p>
-        </div>
-      </Link>
     </nav>
   );
 }
