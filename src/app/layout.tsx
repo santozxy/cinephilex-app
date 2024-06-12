@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | CinephileX",
+    template: "%s - CinephileX",
     default: "CinephileX",
   },
 };
@@ -18,7 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt" className={`${inter.variable}`}>
-      <body className=" bg-zinc-900 text-zinc-100  antialiased">{children}</body>
+      <body className=" bg-zinc-900 text-zinc-100  antialiased">
+        {children}
+      </body>
     </html>
   );
 }
