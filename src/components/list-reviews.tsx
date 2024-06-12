@@ -45,8 +45,19 @@ export function ListReviews({ data }: ListReviewsProps) {
               {new Date(review.created_at).toLocaleDateString()}
             </span>
           </div>
-
-          <RatingStar rating={review.author_details.rating} />
+          {review.author_details.rating ? (
+            <div className="flex items-center gap-1">
+              <Star size={20} className="text-yellow-400" />
+              <span className="font-medium">
+                {review.author_details.rating.toFixed(2)}
+              </span>
+            </div>
+          ) : (
+            <div className="flex items-center gap-1">
+              <Star size={20} className="text-yellow-400" />
+              <span className="font-medium">Sem avaliação</span>
+            </div>
+          )}
         </div>
       </div>
        {" "}

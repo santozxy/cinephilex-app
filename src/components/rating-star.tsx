@@ -5,6 +5,8 @@ export function RatingStar({ rating }: { rating: number }) {
   const totalStars = 5;
   const filledStars = Math.floor((rating / 10) * totalStars);
   const halfStar = (rating / 10) * totalStars - filledStars >= 0.5;
+  const ratingFormatted = rating.toFixed(2) as unknown as number;
+  
 
   return (
     <div className="flex justify-between items-center gap-3">

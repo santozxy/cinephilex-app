@@ -27,6 +27,37 @@ export interface All {
   origin_country?: string[];
 }
 
+export interface Credits {
+  id: number;
+  cast: {
+    adult: boolean;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path?: string;
+    cast_id: number;
+    character: string;
+    credit_id: string;
+    order: number;
+  }[];
+  crew: {
+    adult: boolean;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path?: string;
+    credit_id: string;
+    department: string;
+    job: string;
+  }[];
+}
+
 export interface Reviews {
   id: number;
   page: number;
@@ -106,4 +137,35 @@ export interface WatchProviders {
       }[];
     };
   };
+}
+
+export interface Images {
+  backdrops: {
+    aspect_ratio: number;
+    height: number;
+    iso_639_1: string;
+    file_path: string;
+    vote_average: number;
+    vote_count: number;
+    width: number;
+  }[];
+  id: number;
+  logos: {
+    aspect_ratio: number;
+    height: number;
+    iso_639_1: string;
+    file_path: string;
+    vote_average: number;
+    vote_count: number;
+    width: number;
+  }[];
+  posters: {
+    aspect_ratio: number;
+    height: number;
+    iso_639_1: string;
+    file_path: string;
+    vote_average: number;
+    vote_count: number;
+    width: number;
+  }[];
 }

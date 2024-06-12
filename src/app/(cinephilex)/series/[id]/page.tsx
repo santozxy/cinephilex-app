@@ -7,7 +7,16 @@ import { ListReviews } from "@/components/list-reviews";
 import { ListTransitions } from "@/components/list-translation";
 import { RatingStar } from "@/components/rating-star";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getSeriesById, getWatchSerieProviders } from "@/service/series/api";
+import {
+  getCreditsSerie,
+  getImagesSerie,
+  getRecommendationsSerie,
+  getReviewsSerie,
+  getSeriesById,
+  getTranslationsSerie,
+  getVideosSerie,
+  getWatchSerieProviders,
+} from "@/service/series/api";
 import { resizeImageURL, imageSize200 } from "@/utils/imageURLs";
 import { format } from "date-fns";
 import { Video, Text } from "lucide-react";
@@ -18,6 +27,16 @@ import { ListCompanies } from "@/components/list-companies";
 export default async function Serie({ params }: { params: { id: string } }) {
   const serie = await getSeriesById(params.id);
   const watchProviders = await getWatchSerieProviders(params.id);
+  const serieVideos = await getVideosSerie(params.id);
+  const serieReviews = await getReviewsSerie(params.id);
+  const serieImages = await getImagesSerie(params.id);
+  const translations = await getTranslationsSerie(params.id);
+  const recommendations = await getRecommendationsSerie(params.id);
+  const credits = await getCreditsSerie(params.id);
+  const cast = credits.cast;
+  const crew = Array.from(
+    new Map(credits.crew.map((item) => [item.id, item])).values()
+  ).filter((item) => item.known_for_department !== "Acting");
 
   return (
     <main className="flex flex-col mt-6">
@@ -132,15 +151,31 @@ export default async function Serie({ params }: { params: { id: string } }) {
               </div>
               <span className="p-2">{serie.overview}</span>
             </div>
+            {serieVideos.length > 0 && <ListClips data={serieVideos} />}
+            {translations.translations && (
+              <ListTransitions data={translations} />
+            )}
+
+            {serieImages.posters.length > 0 && (
+              <ListPosters data={serieImages.posters.slice(0,40)} />
+            )}
+
+            {recommendations.results.length > 0 && (
+              <ListCards
+                titleSection="Talvez goste de:"
+                data={recommendations}
+                path="/series"
+                type="serie"
+              />
+            )}
           </TabsContent>
-          <TabsContent
-            value="credits"
-            className="flex flex-col gap-2 p-3"
-          ></TabsContent>
-          <TabsContent
-            value="reviews"
-            className="flex flex-col gap-2 p-3"
-          ></TabsContent>
+          <TabsContent value="credits" className="flex flex-col gap-2 p-3">
+            <ListCredits title="Atores" data={cast} path="/persons" />
+            <ListCredits title="Equipe" data={crew} path="/persons" />
+          </TabsContent>
+          <TabsContent value="reviews" className="flex flex-col gap-2 p-3">
+            <ListReviews data={serieReviews} />
+          </TabsContent>
         </Tabs>
       </section>
     </main>

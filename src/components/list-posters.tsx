@@ -9,17 +9,10 @@ import {
 import { resizeImageURL } from "@/utils/imageURLs";
 import Image from "next/image";
 import { ImagePlayIcon } from "lucide-react";
+import { Images } from "@/service/all/allDTO";
 
 interface ListPostersProps {
-  data: {
-    aspect_ratio: number;
-    height: number;
-    iso_639_1: string;
-    file_path: string;
-    vote_averag: number;
-    vote_count: number;
-    width: number;
-  }[];
+  data: Images["posters"];
 }
 
 export function ListPosters({ data }: ListPostersProps) {

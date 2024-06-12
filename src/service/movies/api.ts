@@ -1,6 +1,6 @@
-import { Reviews, Translations, Videos, WatchProviders } from "../all/allDTO";
+import { Credits, Images, Reviews, Translations, Videos, WatchProviders } from "../all/allDTO";
 import { api } from "../api";
-import { Credits, DetailsMovie, MoviesDTO } from "./moviesDTO";
+import {  DetailsMovie, MoviesDTO } from "./moviesDTO";
 
 export async function getNowPlayingMovies() {
   const response = await api(`/movie/now_playing?`, {
@@ -146,8 +146,9 @@ export async function getVideosMovie(id: string) {
     (video) => video.type === "Trailer" && video.site === "YouTube"
   );
   const videosBR = videos.filter((video) => video.iso_3166_1 === "BR");
-  console.log(videosBR);
-  return videos;
+  const videoUS = videos.filter((video) => video.iso_3166_1 === "US");
+  const videosTotal = [...videosBR, ...videoUS];
+  return videosTotal;
 }
 
 export async function getWacthProvidersMovie(id: string) {
@@ -176,7 +177,7 @@ export async function getImagesMovie(id: string) {
       revalidate: 60 * 60,
     },
   });
-  const data = await response.json();
+  const data: Images = await response.json();
   return data;
 }
 
