@@ -86,39 +86,42 @@ export default async function Movie({ params }: MovieProps) {
                 </span>
               ))}
             </div>
-
-            {watchProviders.buy && (
-              <div className="flex-col flex gap-2 ">
-                <h1 className="font-semibold">Onde comprar:</h1>
-                <div className="flex flex-wrap gap-2 items-center">
-                  {watchProviders.buy.map((provider) => (
-                    <Image
-                      key={provider.provider_id}
-                      src={`${imageSize200}${provider.logo_path}`}
-                      alt={provider.provider_name}
-                      width={40}
-                      height={40}
-                      className="w-10 h-10  shadow-lg rounded-lg"
-                    />
-                  ))}
+            {watchProviders && (
+              <div className="flex flex-col gap-4 p-2">
+                watchProviders.buy && (
+                <div className="flex-col flex gap-2 ">
+                  <h1 className="font-semibold">Onde comprar:</h1>
+                  <div className="flex flex-wrap gap-2 items-center">
+                    {watchProviders.buy.map((provider) => (
+                      <Image
+                        key={provider.provider_id}
+                        src={`${imageSize200}${provider.logo_path}`}
+                        alt={provider.provider_name}
+                        width={40}
+                        height={40}
+                        className="w-10 h-10  shadow-lg rounded-lg"
+                      />
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
-            {watchProviders.flatrate && (
-              <div className="flex-col flex gap-2 ">
-                <h1 className="font-semibold">Onde assistir:</h1>
-                <div className="flex flex-wrap gap-2 items-center">
-                  {watchProviders.flatrate.map((provider) => (
-                    <Image
-                      key={provider.provider_id}
-                      src={`${imageSize200}${provider.logo_path}`}
-                      alt={provider.provider_name}
-                      width={40}
-                      height={40}
-                      className="w-10 h-10  shadow-lg rounded-lg"
-                    />
-                  ))}
-                </div>
+                )
+                {watchProviders.flatrate && (
+                  <div className="flex-col flex gap-2 ">
+                    <h1 className="font-semibold">Onde assistir:</h1>
+                    <div className="flex flex-wrap gap-2 items-center">
+                      {watchProviders.flatrate.map((provider) => (
+                        <Image
+                          key={provider.provider_id}
+                          src={`${imageSize200}${provider.logo_path}`}
+                          alt={provider.provider_name}
+                          width={40}
+                          height={40}
+                          className="w-10 h-10  shadow-lg rounded-lg"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             )}
             <div className="flex flex-wrap gap-1 items-center">
