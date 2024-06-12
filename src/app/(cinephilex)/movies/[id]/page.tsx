@@ -66,7 +66,7 @@ export default async function Movie({ params }: MovieProps) {
             <div className="flex gap-2 flex-wrap items-center">
               {movie.genres.map((genre) => (
                 <span
-                  className="bg-primary/90 p-1.5 rounded-full text-sm"
+                  className="bg-primary/90 p-2 rounded-lg text-sm"
                   key={genre.id}
                 >
                   {genre.name}
@@ -126,7 +126,7 @@ export default async function Movie({ params }: MovieProps) {
                   <Text size={24} className="text-primary" />
                   <h1 className="text-lg font-semibold">Sinopse</h1>
                 </div>
-                <span>{movie.overview}</span>
+                <span className="p-2">{movie.overview}</span>
               </div>
               <ListTransitions data={translations} />
               {movieVideos && <ListClips data={movieVideos} />}
