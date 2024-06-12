@@ -1,5 +1,6 @@
+import { WatchProviders } from "../all/allDTO";
 import { api } from "../api";
-import { SeriesDTO } from "./seriesDTO";
+import { SerieDetails, SeriesDTO } from "./seriesDTO";
 
 export async function getPopularSeries() {
   const response = await api(`/tv/popular?`, {
@@ -31,13 +32,13 @@ export async function getTrendingDaySeries() {
   return data;
 }
 
-export async function getSeriesById(id: number) {
+export async function getSeriesById(id: string) {
   const response = await api(`/tv/${id}?`, {
     next: {
       revalidate: 60 * 60,
     },
   });
-  const data: SeriesDTO = await response.json();
+  const data: SerieDetails = await response.json();
   return data;
 }
 
@@ -77,3 +78,14 @@ export async function getSerieWithHighPopularity() {
   const serie = serieWithOverviews[randomIndex];
   return serie;
 }
+
+export async function getWatchSerieProviders(id: string) {
+  const response = await api(`/tv/${id}/watch/providers?language=`, {
+    next: {
+      revalidate: 60 * 60,
+    },
+  });
+  const data: WatchProviders = await response.json();
+  return data.results.BR ;
+}
+
