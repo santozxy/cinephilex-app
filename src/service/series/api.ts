@@ -7,7 +7,7 @@ import {
   WatchProviders,
 } from "../all/allDTO";
 import { api } from "../api";
-import { SerieDetails, SeriesDTO } from "./seriesDTO";
+import { SeasonDetails, SerieDetails, SeriesDTO } from "./seriesDTO";
 
 export async function getPopularSeries() {
   const response = await api(`/tv/popular?`, {
@@ -104,7 +104,9 @@ export async function getVideosSerie(id: string) {
   });
   const data: Videos = await response.json();
   const videos = data.results.filter(
-    (video) => video.type === "Trailer" && video.site === "YouTube"
+    (video) =>
+      (video.type === "Trailer" && video.site === "YouTube") ||
+      video.type === "Opening Credits"
   );
   const videosBR = videos.filter((video) => video.iso_3166_1 === "BR");
   const videoUS = videos.filter((video) => video.iso_3166_1 === "US");
@@ -159,5 +161,15 @@ export async function getCreditsSerie(id: string) {
     },
   });
   const data: Credits = await response.json();
+  return data;
+}
+
+export async function getSeasonDetails(id: string, seasonNumber: string) {
+  const response = await api(`/tv/${id}/season/${seasonNumber}?`, {
+    next: {
+      revalidate: 60 * 60 * 24,
+    },
+  });
+  const data: SeasonDetails = await response.json();
   return data;
 }
