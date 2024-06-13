@@ -24,6 +24,7 @@ import { ListClips } from "@/components/list-clips";
 import { ListTransitions } from "@/components/list-translation";
 import { ListPosters } from "@/components/list-posters";
 import { ListCompanies } from "@/components/list-companies";
+import ListProviders from "@/components/list-providers";
 
 interface MovieProps {
   params: {
@@ -88,44 +89,7 @@ export default async function Movie({ params }: MovieProps) {
               ))}
             </div>
             <hr className="w-full border-t-2 border-zinc-800" />
-            {watchProviders && (
-              <div className="flex flex-col gap-4 p-2">
-                {watchProviders.buy && (
-                  <div className="flex-col flex gap-2 ">
-                    <h1 className="font-semibold">Onde comprar:</h1>
-                    <div className="flex flex-wrap gap-2 items-center">
-                      {watchProviders.buy.map((provider) => (
-                        <Image
-                          key={provider.provider_id}
-                          src={`${imageSize200}${provider.logo_path}`}
-                          alt={provider.provider_name}
-                          width={40}
-                          height={40}
-                          className="w-10 h-10  shadow-lg rounded-lg"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {watchProviders.flatrate && (
-                  <div className="flex-col flex gap-2 ">
-                    <h1 className="font-semibold">Onde assistir:</h1>
-                    <div className="flex flex-wrap gap-2 items-center">
-                      {watchProviders.flatrate.map((provider) => (
-                        <Image
-                          key={provider.provider_id}
-                          src={`${imageSize200}${provider.logo_path}`}
-                          alt={provider.provider_name}
-                          width={40}
-                          height={40}
-                          className="w-10 h-10  shadow-lg rounded-lg"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
+            {watchProviders && <ListProviders data={watchProviders} />}
 
             <div className="flex flex-wrap gap-1 items-center">
               <span className="text-primary font-semibold">Orçamento:</span>
