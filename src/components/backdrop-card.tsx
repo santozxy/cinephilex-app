@@ -70,7 +70,7 @@ export function BackdropCard({
               {item.overview.slice(0, 202) + "..."}
             </p>
             <Link
-              className="bg-primary bg-opacity-50 duration-300 ease-in-out rounded-full max-sm:p-1 p-1.5 flex justify-center items-center hover:bg-opacity-80 w-56 max-sm:hidden shadow-lg"
+              className="bg-primary bg-opacity-50 duration-300 ease-in-out rounded-lg max-sm:p-1 p-1.5 flex justify-center items-center hover:bg-opacity-80 w-56 max-sm:hidden shadow-lg"
               href={path ? `${path}${item.id}` : generateLink(item)}
             >
               <span className="font-semibold max-sm:text-sm">Ver detalhes</span>

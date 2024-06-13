@@ -37,7 +37,7 @@ export function ListPosters({ data }: ListPostersProps) {
                 alt={""}
                 width={192}
                 height={272}
-                className=" object-center w-[12rem] max-sm:h-48 max-sm:w-36 lg:h-[16rem] rounded-md shadow-xl shadow-black/30"
+                className="w-[12rem] max-sm:h-48 max-sm:w-36 lg:h-[16rem] rounded-md shadow-xl shadow-black/30"
               />
             </CarouselItem>
           ))}

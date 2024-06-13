@@ -1,7 +1,7 @@
 import { SerieDetails } from "@/service/series/seriesDTO";
 import React from "react";
 import Image from "next/image";
-import { resizeImageURL } from "@/utils/imageURLs";
+import { imageSize200, resizeImageURL } from "@/utils/imageURLs";
 
 export interface ListCompaniesProps {
   data: SerieDetails["production_companies"];
@@ -15,7 +15,7 @@ export function ListCompanies({ data }: ListCompaniesProps) {
         {data.map((company) => (
           <Image
             key={company.id}
-            src={`${resizeImageURL}${company.logo_path ?? "/notFound"}`}
+            src={`${imageSize200}${company.logo_path ?? "/notFound"}`}
             alt={company.name}
             width={64}
             height={40}

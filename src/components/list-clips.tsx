@@ -19,7 +19,7 @@ export function ListClips({ data }: ListClipsProps) {
         <h1 className="text-lg font-semibold ">Trailers</h1>
       </div>
 
-      <Carousel opts={{ slidesToScroll: 2 }}>
+      <Carousel opts={{ slidesToScroll: 3 }}>
         <CarouselContent className="py-6 ">
           {data.map((video) => (
             <CarouselItem key={video.id} className="basis-auto w-1/2 xl:w-1/3 h-72 ">
