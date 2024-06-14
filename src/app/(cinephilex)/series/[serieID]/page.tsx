@@ -28,7 +28,7 @@ import ListProviders from "@/components/list-providers";
 import { Metadata } from "next";
 import ListCrew from "@/components/list-crew";
 import Link from "next/link";
-import SelectSeason from "@/components/select-season";
+import Season from "@/components/season";
 
 export async function generateMetadata({
   params,
@@ -176,7 +176,10 @@ export default async function Serie({
           </TabsContent>
           <TabsContent value="seasons" className="flex flex-col gap-2 p-3">
             <Suspense fallback={<div>Carregando...</div>}>
-              <SelectSeason quantify={serie.number_of_seasons} serieID={params.serieID} />
+              <Season
+                quantify={serie.number_of_seasons}
+                serieID={params.serieID}
+              />
             </Suspense>
           </TabsContent>
           <TabsContent value="credits" className="flex flex-col gap-2 p-3">
