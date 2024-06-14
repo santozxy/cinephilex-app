@@ -1,5 +1,5 @@
 import { BackdropCard } from "@/components/backdrop-card";
-import { ListCredits } from "@/components/list-credits";
+import { ListCast } from "@/components/list-cast";
 import {
   getCreditsMovie,
   getImagesMovie,
@@ -25,6 +25,8 @@ import { ListTransitions } from "@/components/list-translation";
 import { ListPosters } from "@/components/list-posters";
 import { ListCompanies } from "@/components/list-companies";
 import ListProviders from "@/components/list-providers";
+import Link from "next/link";
+import ListCrew from "@/components/list-crew";
 
 interface MovieProps {
   params: {
@@ -36,7 +38,20 @@ export async function generateMetadata({
   params,
 }: MovieProps): Promise<Metadata> {
   const movie = await getMovieById(params.id);
-  return { title: `${movie.title}` };
+  return {
+    title: `${movie.title}`,
+    description: movie.overview,
+    openGraph: {
+      images: [
+        {
+          url: `${resizeImageURL}${movie.poster_path}`,
+          width: 450,
+          height: 600,
+          alt: movie.title,
+        },
+      ],
+    },
+  };
 }
 
 export default async function Movie({ params }: MovieProps) {
@@ -52,6 +67,7 @@ export default async function Movie({ params }: MovieProps) {
   const crew = Array.from(
     new Map(credits.crew.map((item) => [item.id, item])).values()
   ).filter((item) => item.known_for_department !== "Acting");
+  const director = credits.crew.find((item) => item.job === "Director");
   return (
     <main className="flex flex-col mt-6">
       <section className="fixed w-full  -z-50 opacity-45">
@@ -60,6 +76,7 @@ export default async function Movie({ params }: MovieProps) {
       <section className="grid sm:grid-cols-[14rem_1fr] grid-cols-1 gap-8">
         <div className="flex flex-col p-2 gap-2 shadow-lg  shadow-black/30 rounded-lg">
           <h1 className="text-xl text-center font-bold">{movie.title}</h1>
+
           <div className="flex flex-col items-center">
             {movie.poster_path ? (
               <Image
@@ -75,6 +92,15 @@ export default async function Movie({ params }: MovieProps) {
                 <Video size={64} className="text-primary" />
               </div>
             )}
+            <div className="flex items-center w-full px-2 pt-2 gap-1 text-xs">
+              <span>Dirigido por</span>
+              <Link
+                href={`/persons/${director?.id}`}
+                className="font-semibold underline hover:text-primary transition-all duration-300 ease-in-out"
+              >
+                {director?.name}
+              </Link>
+            </div>
           </div>
           <div className="flex flex-col gap-4 p-2">
             <RatingStar rating={movie.vote_average} />
@@ -153,8 +179,8 @@ export default async function Movie({ params }: MovieProps) {
             )}
           </TabsContent>
           <TabsContent value="credits" className="flex flex-col gap-2 p-3">
-            <ListCredits title="Atores" data={cast} path="/persons" />
-            <ListCredits title="Equipe" data={crew} path="/persons" />
+            <ListCast title="Atores" cast={cast} path="/persons" />
+            <ListCrew crew={crew} />
           </TabsContent>
           <TabsContent value="reviews" className="flex flex-col gap-2 p-3">
             <ListReviews data={movieReviews} />

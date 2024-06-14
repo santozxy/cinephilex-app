@@ -1,7 +1,7 @@
 import { BackdropCard } from "@/components/backdrop-card";
 import { ListCards } from "@/components/list-cards";
 import { ListClips } from "@/components/list-clips";
-import { ListCredits } from "@/components/list-credits";
+import { ListCast } from "@/components/list-cast";
 import { ListPosters } from "@/components/list-posters";
 import { ListReviews } from "@/components/list-reviews";
 import { ListTransitions } from "@/components/list-translation";
@@ -17,38 +17,37 @@ import {
   getVideosSerie,
   getWatchSerieProviders,
 } from "@/service/series/api";
-import { resizeImageURL, imageSize200 } from "@/utils/imageURLs";
+import { resizeImageURL } from "@/utils/imageURLs";
 import { format } from "date-fns";
 import { Video, Text } from "lucide-react";
-import React from "react";
+import React, { Suspense } from "react";
 import Image from "next/image";
 import { ListCompanies } from "@/components/list-companies";
 import { ListSeasons } from "@/components/list-seasons";
 import ListProviders from "@/components/list-providers";
+import { Metadata } from "next";
+import ListCrew from "@/components/list-crew";
+import Link from "next/link";
+import SelectSeason from "@/components/select-season";
 
-export async function getStaticParams({
+export async function generateMetadata({
   params,
 }: {
   params: { serieID: string };
-}) {
+}): Promise<Metadata> {
   const serie = await getSeriesById(params.serieID);
-  const watchProviders = await getWatchSerieProviders(params.serieID);
-  const serieVideos = await getVideosSerie(params.serieID);
-  const serieReviews = await getReviewsSerie(params.serieID);
-  const serieImages = await getImagesSerie(params.serieID);
-  const translations = await getTranslationsSerie(params.serieID);
-  const recommendations = await getRecommendationsSerie(params.serieID);
-  const credits = await getCreditsSerie(params.serieID);
   return {
-    props: {
-      serie,
-      watchProviders,
-      serieVideos,
-      serieReviews,
-      serieImages,
-      translations,
-      recommendations,
-      credits,
+    title: `${serie.name}`,
+    description: serie.overview,
+    openGraph: {
+      images: [
+        {
+          url: `${resizeImageURL}${serie.poster_path}`,
+          width: 450,
+          height: 600,
+          alt: serie.name,
+        },
+      ],
     },
   };
 }
@@ -70,6 +69,7 @@ export default async function Serie({
   const crew = Array.from(
     new Map(credits.crew.map((item) => [item.id, item])).values()
   ).filter((item) => item.known_for_department !== "Acting");
+  const director = crew.find((item) => item.job === "Director");
 
   return (
     <main className="flex flex-col mt-6">
@@ -93,6 +93,15 @@ export default async function Serie({
                 <Video size={64} className="text-primary" />
               </div>
             )}
+            <div className="flex items-center w-full px-2 pt-2 gap-1 text-xs">
+              <span>Dirigido por</span>
+              <Link
+                href={`/persons/${director?.id}`}
+                className="font-semibold underline hover:text-primary transition-all duration-300 ease-in-out"
+              >
+                {director?.name}
+              </Link>
+            </div>
           </div>
           <div className="flex flex-col gap-4 p-2">
             <RatingStar rating={serie.vote_average} />
@@ -161,16 +170,18 @@ export default async function Serie({
                 titleSection="Talvez goste de:"
                 data={recommendations}
                 path="/series"
-                type="serie"
+                type="tv"
               />
             )}
           </TabsContent>
           <TabsContent value="seasons" className="flex flex-col gap-2 p-3">
-            <ListSeasons seasons={serie.seasons} serieID={params.serieID} />
+            <Suspense fallback={<div>Carregando...</div>}>
+              <SelectSeason quantify={serie.number_of_seasons} serieID={params.serieID} />
+            </Suspense>
           </TabsContent>
           <TabsContent value="credits" className="flex flex-col gap-2 p-3">
-            <ListCredits title="Atores" data={cast} path="/persons" />
-            <ListCredits title="Equipe" data={crew} path="/persons" />
+            <ListCast title="Atores" cast={cast} path="/persons" />
+            <ListCrew crew={crew} />
           </TabsContent>
           <TabsContent value="reviews" className="flex flex-col gap-2 p-3">
             <ListReviews data={serieReviews} />
