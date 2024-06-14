@@ -12,8 +12,9 @@ export default function Loading() {
           defaultValue="movie"
           className="flex flex-col shadow-lg shadow-black/30"
         >
-          <TabsList className="grid grid-cols-3">
-            <TabsTrigger value="movie">Filme</TabsTrigger>
+          <TabsList className="grid grid-cols-4">
+            <TabsTrigger value="movie">Série | TV</TabsTrigger>
+            <TabsTrigger value="seasons">Temporadas</TabsTrigger>
             <TabsTrigger value="credits">Créditos</TabsTrigger>
             <TabsTrigger value="reviews">Reviews</TabsTrigger>
           </TabsList>
@@ -47,11 +48,15 @@ export default function Loading() {
             <Skeleton className="h-60 rounded-lg" />
           </TabsContent>
           <TabsContent
-            value="credits"
+            value="seasons"
             className="flex flex-col gap-2 p-3"
           ></TabsContent>
           <TabsContent
             value="reviews"
+            className="flex flex-col gap-2 p-3"
+          ></TabsContent>
+          <TabsContent
+            value="credits"
             className="flex flex-col gap-2 p-3"
           ></TabsContent>
         </Tabs>
