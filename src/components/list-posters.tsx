@@ -31,12 +31,11 @@ export function ListPosters({ data }: ListPostersProps) {
               className="basis-auto rounded-md group relative hover:z-[999]  hover:scale-105 transition-transform duration-500 ease-in-out"
             >
               <Image
-                quality={70}
                 priority
                 src={`${resizeImageURL}${item.file_path}`}
                 alt={""}
                 width={192}
-                height={272}
+                height={256}
                 className="w-[12rem] max-sm:h-48 max-sm:w-36 lg:h-[16rem] rounded-md shadow-xl shadow-black/30"
               />
             </CarouselItem>

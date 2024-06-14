@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 
 export function NavLinks() {
   const path = usePathname();
-  console.log(path);
   return (
     <nav className="flex gap-8 justify-center items-center ">
       <Link href="/" className={`py-2 no-underline sm:hidden `}>

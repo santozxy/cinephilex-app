@@ -17,7 +17,7 @@ export function ListTransitions({ data }: ListTransitionsProps) {
       <ul className="flex flex-wrap gap-2">
         {data.translations.map((translation) => (
           <li
-            key={translation.name}
+            key={translation.name + translation.iso_3166_1}
             className="p-2 bg-zinc-800 shadow-lg shadow-black/30 rounded-lg text-sm"
           >
             {translation.name} - {translation.iso_3166_1}

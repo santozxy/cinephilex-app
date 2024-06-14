@@ -22,7 +22,7 @@ export function ListClips({ data }: ListClipsProps) {
       <Carousel opts={{ slidesToScroll: 3 }}>
         <CarouselContent className="py-6 ">
           {data.map((video) => (
-            <CarouselItem key={video.id} className="basis-auto w-1/2 xl:w-1/3 h-72 ">
+            <CarouselItem key={video.id} className="basis-auto">
               <iframe
                 key={video.key}
                 className="rounded-lg w-full h-full"
@@ -30,6 +30,7 @@ export function ListClips({ data }: ListClipsProps) {
                 title={video.name}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
+                referrerPolicy="strict-origin-when-cross-origin"
               />
             </CarouselItem>
           ))}

@@ -45,7 +45,9 @@ export function ListCards({
 
   const newData = data.results.filter(
     (item) =>
-      item.poster_path !== null && !item.title?.toLowerCase().includes("porno") && !item.title?.toLowerCase().includes("japanese")
+      item.poster_path !== null &&
+      !item.title?.toLowerCase().includes("porno") &&
+      !item.title?.toLowerCase().includes("japanese")
   );
   return (
     <section>
@@ -70,7 +72,7 @@ export function ListCards({
                           src={`${resizeImageURL}${item.poster_path}`}
                           alt={item.title ?? ""}
                           width={192}
-                          height={272}
+                          height={256}
                           className=" object-center w-[12rem] max-sm:h-48 max-sm:w-36 lg:h-[16rem] rounded-md shadow-xl shadow-black/30"
                         />
                       </Link>
@@ -90,11 +92,13 @@ export function ListCards({
                             </div>
                           </div>
                           <p className="text-zinc-300 text-justify max-sm:hidden">
-                            {item.overview.slice(0, 200) + "..."}
+                            {item.overview.length > 240
+                              ? item.overview.slice(0, 240) + "..."
+                              : item.overview}
                           </p>
                           <Link
                             href={`${path}/${item.id}`}
-                            className="bg-primary bg-opacity-50 duration-300 ease-in-out rounded-full max-sm:p-1 p-1.5 flex justify-center items-center hover:bg-opacity-80 w-56 max-sm:hidden shadow-lg"
+                            className="bg-primary bg-opacity-50 duration-300 ease-in-out rounded-lg max-sm:p-1 p-1.5 flex justify-center items-center hover:bg-opacity-80 w-56 max-sm:hidden shadow-lg"
                           >
                             <span className="font-semibold max-sm:text-sm">
                               Ver detalhes
