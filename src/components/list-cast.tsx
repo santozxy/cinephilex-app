@@ -65,12 +65,18 @@ export function ListCast({ cast, path = "/persons", title }: ListCastProps) {
                     </div>
                   )}
                 </Link>
-                <div className="absolute text-xs flex flex-col w-[6.5rem] bottom-0  bg-zinc-900/50 shadow-lg shadow-black/30 rounded-br-md p-1 ">
-                  <span className=" font-semibold">{item.character}</span>
+                <div className="absolute text-xs flex flex-col w-[6.5rem] bottom-0 bg-zinc-900/50 shadow-lg shadow-black/30 rounded-br-md p-1">
+                  <span className="font-semibold">
+                    {item.character
+                      .split(" " || "-")
+                      .slice(0, 2)
+                      .join(" ")}
+                  </span>
                   <span>
-                    {item.name.length > 17
-                      ? item.name.slice(0, 17) + "..."
-                      : item.name}{" "}
+                    {item.name
+                      .split(" " || "-")
+                      .slice(0, 2)
+                      .join(" ")}
                   </span>
                 </div>
               </CarouselItem>

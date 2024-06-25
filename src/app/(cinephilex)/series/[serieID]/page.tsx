@@ -69,7 +69,6 @@ export default async function Serie({
   const crew = Array.from(
     new Map(credits.crew.map((item) => [item.id, item])).values()
   ).filter((item) => item.known_for_department !== "Acting");
-  const director = crew.find((item) => item.job === "Director");
 
   return (
     <main className="flex flex-col mt-6">
@@ -93,15 +92,6 @@ export default async function Serie({
                 <Video size={64} className="text-primary" />
               </div>
             )}
-            <div className="flex items-center w-full px-2 pt-2 gap-1 text-xs">
-              <span>Dirigido por</span>
-              <Link
-                href={`/persons/${director?.id}`}
-                className="font-semibold underline hover:text-primary transition-all duration-300 ease-in-out"
-              >
-                {director?.name}
-              </Link>
-            </div>
           </div>
           <div className="flex flex-col gap-4 p-2">
             <RatingStar rating={serie.vote_average} />
