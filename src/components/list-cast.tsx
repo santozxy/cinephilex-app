@@ -24,7 +24,7 @@ export function ListCast({ cast, path = "/persons", title }: ListCastProps) {
   const listSizeLarge = sizeData > 42;
   const listSizeXLarge = sizeData > 63;
   const heightBySize = listSizeSmall
-    ? ""
+    ? "h-52"
     : listSizeMedium
     ? "h-[40rem]"
     : listSizeLarge

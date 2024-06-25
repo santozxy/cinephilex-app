@@ -6,16 +6,40 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Suspense, useEffect, useState } from "react";
+import { ReactNode, Suspense, useEffect, useState } from "react";
 import { getSeasonDetails } from "@/service/series/api";
 import { SeasonDetails } from "@/service/series/seriesDTO";
 import Image from "next/image";
 import { resizeImageURL } from "@/utils/imageURLs";
-import { ImageOff } from "lucide-react";
+import {
+  ImageOff,
+  List,
+  ListVideo,
+  LucideVideotape,
+  Text,
+  Video,
+} from "lucide-react";
+import Link from "next/link";
+import { Skeleton } from "./skeleton";
 
 interface SelectSeasonProps {
   quantify: number;
   serieID: string;
+}
+
+function LoadingEpisodes() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Skeleton className="w-24" />
+      <Skeleton className="w-full h-20" />
+      <Skeleton className="w-24" />
+      <div className="grid-cols-3 sm:grid-cols-2">
+        <Skeleton className="w-full h-40" />
+        <Skeleton className="w-full h-40" />
+        <Skeleton className="w-full h-40" />
+      </div>
+    </div>
+  );
 }
 
 export default function Season({ quantify, serieID }: SelectSeasonProps) {
@@ -47,7 +71,7 @@ export default function Season({ quantify, serieID }: SelectSeasonProps) {
         defaultValue="1"
         onValueChange={(value) => setSelectSeason(Number(value))}
       >
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-80">
           <SelectValue placeholder="Selecione a temporada" />
         </SelectTrigger>
         <SelectContent>
@@ -62,19 +86,27 @@ export default function Season({ quantify, serieID }: SelectSeasonProps) {
           ))}
         </SelectContent>
       </Select>
-      <Suspense fallback={<div>Carregando...</div>}>
-        <div className="flex gap-3 ">
-          <div>
-            <h2 className="font-semibold text-primary">Descrição:</h2>
-            <p>{data?.overview}</p>
+      <Suspense fallback={<LoadingEpisodes />}>
+        {data?.overview && (
+          <div className="flex flex-col gap-1">
+            <div className="flex gap-2 items-center">
+              <Text size={24} className="text-primary" />
+              <h1 className="text-lg font-semibold ">Descrição</h1>
+            </div>
+            <p className="p-2">{data?.overview}</p>
           </div>
-        </div>
-        <div>
-          <h2 className="text-xl font-semibold">Episódios</h2>
-          <div className="grid grid-cols-3 gap-4">
+        )}
+
+        <div className="flex flex-col gap-4">
+          <div className="flex gap-2 items-center">
+            <Video size={24} className="text-primary" />
+            <h1 className="text-lg font-semibold ">Episódios</h1>
+          </div>
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2  gap-4">
             {data?.episodes.map((episode) => (
-              <div
-                className="p-2 bg-zinc-800 shadow-lg rounded-lg"
+              <Link
+                href={`/series/${serieID}/episode/${episode.id}`}
+                className="p-2 bg-zinc-800 rounded-lg flex gap-2 flex-col hover:shadow-2xl hover:scale-105 transition duration-300 ease-in-out"
                 key={episode.id}
               >
                 {episode.still_path && (
@@ -83,7 +115,7 @@ export default function Season({ quantify, serieID }: SelectSeasonProps) {
                     alt={episode.name}
                     width={288}
                     height={160}
-                    className="rounded-md w-72 h-40"
+                    className="rounded-md w-full h-48"
                   />
                 )}
                 {!episode.still_path && (
@@ -91,20 +123,16 @@ export default function Season({ quantify, serieID }: SelectSeasonProps) {
                     <ImageOff size={30} className="text-primary" />
                   </div>
                 )}
-
-                <h3 className="text-lg font-semibold">{episode.name}</h3>
-                <p>{episode.overview}</p>
-                <div className="flex gap-2 items-center">
-                  <span className="text-primary font-semibold">
-                    Lançamento:
-                  </span>
-                  <span>{episode.air_date}</span>
+                <hr className="w-full border-t border-zinc-600" />
+                <div className="flex flex-col gap-1 p-2  items-start">
+                  <div className="flex gap-2">
+                    <h3 className="text-lg font-semibold">
+                      {episode.episode_number} - {episode.name}
+                    </h3>
+                  </div>
+                  <p className="text-sm">{episode.overview}</p>
                 </div>
-                <div className="flex gap-2 items-center">
-                  <span className="text-primary font-semibold">Nota:</span>
-                  <span>{episode.vote_average}</span>
-                </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
