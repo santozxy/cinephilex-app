@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Skeleton } from "./skeleton";
+import { ListEpisodes } from "./list-episodes";
 
 interface SelectSeasonProps {
   quantify: number;
@@ -86,57 +87,25 @@ export default function Season({ quantify, serieID }: SelectSeasonProps) {
           ))}
         </SelectContent>
       </Select>
-      <Suspense fallback={<LoadingEpisodes />}>
-        {data?.overview && (
-          <div className="flex flex-col gap-1">
-            <div className="flex gap-2 items-center">
-              <Text size={24} className="text-primary" />
-              <h1 className="text-lg font-semibold ">Descrição</h1>
-            </div>
-            <p className="p-2">{data?.overview}</p>
-          </div>
-        )}
-
-        <div className="flex flex-col gap-4">
-          <div className="flex gap-2 items-center">
-            <Video size={24} className="text-primary" />
-            <h1 className="text-lg font-semibold ">Episódios</h1>
-          </div>
-          <div className="grid lg:grid-cols-3 sm:grid-cols-2  gap-4">
-            {data?.episodes.map((episode) => (
-              <Link
-                href={`/series/${serieID}/episode/${episode.id}`}
-                className="p-2 bg-zinc-800 rounded-lg flex gap-2 flex-col hover:shadow-2xl hover:scale-105 transition duration-300 ease-in-out"
-                key={episode.id}
-              >
-                {episode.still_path && (
-                  <Image
-                    src={`${resizeImageURL}${episode.still_path}`}
-                    alt={episode.name}
-                    width={288}
-                    height={160}
-                    className="rounded-md w-full h-48"
-                  />
-                )}
-                {!episode.still_path && (
-                  <div className="bg-zinc-800 rounded-md w-72 h-40 flex items-center justify-center">
-                    <ImageOff size={30} className="text-primary" />
-                  </div>
-                )}
-                <hr className="w-full border-t border-zinc-600" />
-                <div className="flex flex-col gap-1 p-2  items-start">
-                  <div className="flex gap-2">
-                    <h3 className="text-lg font-semibold">
-                      {episode.episode_number} - {episode.name}
-                    </h3>
-                  </div>
-                  <p className="text-sm">{episode.overview}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+      <div className="flex flex-col gap-1">
+        <div className="flex gap-2 items-center">
+          <Text size={24} className="text-primary" />
+          <h1 className="text-lg font-semibold ">Descrição</h1>
         </div>
-      </Suspense>
+        <p className="p-2">
+          {data?.overview ?? "Nenhuma descrição encontrada!"}
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-4">
+        <div className="flex gap-2 items-center">
+          <Video size={24} className="text-primary" />
+          <h1 className="text-lg font-semibold ">Episódios</h1>
+        </div>
+        <Suspense fallback={<LoadingEpisodes />}>
+          <ListEpisodes episodes={data} />
+        </Suspense>
+      </div>
     </div>
   );
 }

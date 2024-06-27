@@ -23,7 +23,6 @@ import { Video, Text } from "lucide-react";
 import React, { Suspense } from "react";
 import Image from "next/image";
 import { ListCompanies } from "@/components/list-companies";
-import { ListSeasons } from "@/components/list-seasons";
 import ListProviders from "@/components/list-providers";
 import { Metadata } from "next";
 import ListCrew from "@/components/list-crew";
