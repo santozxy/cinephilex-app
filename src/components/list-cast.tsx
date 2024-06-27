@@ -20,17 +20,17 @@ interface ListCastProps {
 export function ListCast({ cast, path = "/persons", title }: ListCastProps) {
   const sizeData = cast.length;
   const listSizeSmall = sizeData < 21;
-  const listSizeMedium = sizeData > 21;
-  const listSizeLarge = sizeData > 42;
+  const listSizeMedium = sizeData < 41;
+  const listSizeLarge = sizeData < 63;
   const listSizeXLarge = sizeData > 63;
   const heightBySize = listSizeSmall
     ? "h-52"
     : listSizeMedium
     ? "h-[40rem]"
     : listSizeLarge
-    ? "h-[51rem]"
+    ? "h-[50rem]"
     : listSizeXLarge
-    ? "h-[51rem]"
+    ? "h-[58rem]"
     : "";
 
   return (
