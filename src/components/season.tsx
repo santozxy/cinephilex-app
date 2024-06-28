@@ -93,7 +93,7 @@ export default function Season({ quantify, serieID }: SelectSeasonProps) {
           <h1 className="text-lg font-semibold ">Descrição</h1>
         </div>
         <p className="p-2">
-          {data?.overview ?? "Nenhuma descrição encontrada!"}
+          {data?.overview ? data.overview : "Nenhuma descrição encontrada!"}
         </p>
       </div>
 
