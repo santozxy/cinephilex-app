@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 * {
     scrollbar-color: #3f3f46 #18181b;
     scrollbar-width: thin;
@@ -11,14 +10,10 @@
 
 html {
     scrollbar-width: none;
-
 }
-
-
 
 @media screen and (max-width: 540px) {
     html {
         font-size: 80%;
     }
-
 }
