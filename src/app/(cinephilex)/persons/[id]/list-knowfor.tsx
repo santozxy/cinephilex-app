@@ -1,5 +1,5 @@
 import React from "react";
-import { PersonExternalIdIMDB } from "@/service/persons/personsDTO";
+import { PersonExternalIdIMDB } from "@/api/persons/personsDTO";
 import { resizeImageURL } from "@/utils/imageURLs";
 import Image from "next/image";
 import Link from "next/link";

@@ -1,7 +1,7 @@
 import { imageSize200, resizeImageURL } from "@/utils/imageURLs";
 import React from "react";
 import Image from "next/image";
-import { Result, SearchDTO } from "@/service/search/searchDTO";
+import { Result, SearchDTO } from "@/api/search/searchDTO";
 import Link from "next/link";
 import { Tv, User, Video } from "lucide-react";
 

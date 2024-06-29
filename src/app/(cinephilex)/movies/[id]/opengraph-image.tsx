@@ -4,7 +4,7 @@ import { env } from "@/env";
 import colors from "tailwindcss/colors";
 import { ImageResponse } from "next/og";
 import { resizeImageURL } from "@/utils/imageURLs";
-import { getMovieById } from "@/service/movies/api";
+import { getMovieById } from "@/api/movies/api";
 // Route segment config
 export const runtime = "edge";
 

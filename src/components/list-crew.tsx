@@ -1,4 +1,4 @@
-import { Credits } from "@/service/all/allDTO";
+import { Credits } from "@/api/all/allDTO";
 import Link from "next/link";
 import React from "react";
 import { Text } from "lucide-react";

@@ -10,7 +10,7 @@ import {
 } from "./ui/carousel";
 import Image from "next/image";
 import Link from "next/link";
-import { Credits } from "@/service/all/allDTO";
+import { Credits } from "@/api/all/allDTO";
 
 interface ListCastProps {
   cast: Credits["cast"];

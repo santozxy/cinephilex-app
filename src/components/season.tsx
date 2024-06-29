@@ -7,8 +7,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ReactNode, Suspense, useEffect, useState } from "react";
-import { getSeasonDetails } from "@/service/series/api";
-import { SeasonDetails } from "@/service/series/seriesDTO";
+import { getSeasonDetails } from "@/api/series/api";
+import { SeasonDetails } from "@/api/series/seriesDTO";
 import Image from "next/image";
 import { resizeImageURL } from "@/utils/imageURLs";
 import {

@@ -3,12 +3,12 @@ import {
   getSeriesByGenre,
   getTopRatedSeries,
   getTrendingDaySeries,
-} from "@/service/series/api";
+} from "@/api/series/api";
 
 import React from "react";
-import {ListCards} from "@/components/list-cards";
+import { ListCards } from "@/components/list-cards";
 import { genrerListSeries } from "@/utils/genrerList";
-import {BackdropCard} from "@/components/backdrop-card";
+import { BackdropCard } from "@/components/backdrop-card";
 
 export default async function Series() {
   const trendingSeries = await getTrendingDaySeries();
@@ -30,7 +30,7 @@ export default async function Series() {
 
   return (
     <main className="flex flex-col justify-center items-center">
-      <BackdropCard item={serieHighPopularity}  path="/series/"/>
+      <BackdropCard item={serieHighPopularity} path="/series/" />
       {ListsCards.map((list) => (
         <ListCards
           key={list.title}

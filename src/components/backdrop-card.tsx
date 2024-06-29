@@ -1,4 +1,4 @@
-import { All } from "@/service/all/allDTO";
+import { All } from "@/api/all/allDTO";
 import { originalImageURL } from "@/utils/imageURLs";
 import { Popcorn } from "lucide-react";
 import Image from "next/image";

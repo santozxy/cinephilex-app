@@ -1,8 +1,8 @@
 import { ListCards } from "@/components/list-cards";
 import { ListPosters } from "@/components/list-posters";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Movie, MoviesDTO } from "@/service/movies/moviesDTO";
-import { getPersonById, getPersonIDforIMDB } from "@/service/persons/api";
+import { Movie, MoviesDTO } from "@/api/movies/moviesDTO";
+import { getPersonById, getPersonIDforIMDB } from "@/api/persons/api";
 import { resizeImageURL } from "@/utils/imageURLs";
 import { format } from "date-fns";
 import { ImageOff, Text, User } from "lucide-react";
@@ -16,8 +16,6 @@ interface PersonProps {
     id: string;
   };
 }
-
-
 
 export default async function Person({ params }: PersonProps) {
   const person = await getPersonById(params.id);

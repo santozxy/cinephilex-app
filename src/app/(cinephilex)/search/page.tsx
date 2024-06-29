@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
 import React from "react";
 import { ListSearchCards } from "@/components/list-search-cards";
-import { SearchDTO } from "@/service/search/searchDTO";
-import { searchProducts } from "@/service/search/api";
+import { SearchDTO } from "@/api/search/searchDTO";
+import { searchProducts } from "@/api/search/api";
 import Pagination from "@/components/pagination";
 
 interface SearchProps {

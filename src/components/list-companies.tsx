@@ -1,4 +1,4 @@
-import { SerieDetails } from "@/service/series/seriesDTO";
+import { SerieDetails } from "@/api/series/seriesDTO";
 import React from "react";
 import Image from "next/image";
 import { imageSize200, resizeImageURL } from "@/utils/imageURLs";

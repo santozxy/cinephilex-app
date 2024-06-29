@@ -16,7 +16,7 @@ import {
   getTranslationsSerie,
   getVideosSerie,
   getWatchSerieProviders,
-} from "@/service/series/api";
+} from "@/api/series/api";
 import { resizeImageURL } from "@/utils/imageURLs";
 import { format } from "date-fns";
 import { Video, Text } from "lucide-react";

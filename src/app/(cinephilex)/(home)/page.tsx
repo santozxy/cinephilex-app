@@ -1,11 +1,8 @@
-import {
-  getBrazilianPopularMovies,
-  getPopularMovies,
-} from "@/service/movies/api";
+import { getBrazilianPopularMovies, getPopularMovies } from "@/api/movies/api";
 import React from "react";
 import { ListCards } from "@/components/list-cards";
-import { getTopRatedSeries, getTrendingDaySeries } from "@/service/series/api";
-import { getTrendingWithHighPopularityWeek } from "@/service/all/api";
+import { getTopRatedSeries, getTrendingDaySeries } from "@/api/series/api";
+import { getTrendingWithHighPopularityWeek } from "@/api/all/api";
 import { BackdropCard } from "@/components/backdrop-card";
 
 export default async function Home() {

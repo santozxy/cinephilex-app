@@ -1,4 +1,4 @@
-import { WatchProviders } from "@/service/all/allDTO";
+import { WatchProviders } from "@/api/all/allDTO";
 import React from "react";
 import Image from "next/image";
 import { imageSize200 } from "@/utils/imageURLs";

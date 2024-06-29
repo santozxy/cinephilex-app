@@ -9,7 +9,7 @@ import {
 import { resizeImageURL } from "@/utils/imageURLs";
 import Image from "next/image";
 import { ImagePlayIcon } from "lucide-react";
-import { Images } from "@/service/all/allDTO";
+import { Images } from "@/api/all/allDTO";
 
 interface ListPostersProps {
   data: Images["posters"];

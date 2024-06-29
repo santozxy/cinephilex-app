@@ -1,5 +1,5 @@
-import { Translations } from "@/service/all/allDTO";
-import { getTranslationsMovie } from "@/service/movies/api";
+import { Translations } from "@/api/all/allDTO";
+import { getTranslationsMovie } from "@/api/movies/api";
 import { Languages } from "lucide-react";
 import React from "react";
 

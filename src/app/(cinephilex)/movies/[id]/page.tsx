@@ -9,7 +9,7 @@ import {
   getTranslationsMovie,
   getVideosMovie,
   getWatchMovieProviders,
-} from "@/service/movies/api";
+} from "@/api/movies/api";
 import { imageSize200, resizeImageURL } from "@/utils/imageURLs";
 import Image from "next/image";
 import React from "react";

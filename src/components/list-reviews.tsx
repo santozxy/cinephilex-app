@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { CalendarDays, Star, User } from "lucide-react";
 import { imageSize200 } from "@/utils/imageURLs";
-import { Reviews } from "@/service/all/allDTO";
+import { Reviews } from "@/api/all/allDTO";
 
 interface ListReviewsProps {
   data: Reviews;

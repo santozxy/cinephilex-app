@@ -6,7 +6,7 @@ import {
   CarouselItem,
 } from "./ui/carousel";
 import { ListVideo } from "lucide-react";
-import { Videos } from "@/service/all/allDTO";
+import { Videos } from "@/api/all/allDTO";
 
 interface ListClipsProps {
   data: Videos["results"];

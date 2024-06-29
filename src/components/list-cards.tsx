@@ -10,14 +10,14 @@ import {
   CarouselItem,
 } from "./ui/carousel";
 import { Film, Star, Tv, User } from "lucide-react";
-import { MoviesDTO } from "@/service/movies/moviesDTO";
+import { MoviesDTO } from "@/api/movies/moviesDTO";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "./ui/tooltip";
-import { SeriesDTO } from "@/service/series/seriesDTO";
+import { SeriesDTO } from "@/api/series/seriesDTO";
 
 interface CarouselCardsProps {
   data: MoviesDTO | SeriesDTO;
