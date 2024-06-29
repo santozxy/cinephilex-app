@@ -5,10 +5,13 @@
 
 * {
     scrollbar-color: #3f3f46 #18181b;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
 }
 
 html {
     scrollbar-width: none;
+
 }
 
 
@@ -17,5 +20,5 @@ html {
     html {
         font-size: 80%;
     }
-    
+
 }
