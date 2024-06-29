@@ -40,7 +40,7 @@ export function ListCast({ cast, path = "/persons", title }: ListCastProps) {
         <h1 className="text-lg font-semibold ">{title}</h1>
       </div>
       <div className="flex w-full">
-        <Carousel opts={{ slidesToScroll: 12 }}>
+        <Carousel opts={{ slidesToScroll: 3 }}>
           <CarouselContent
             className={` py-6 flex w-full flex-wrap flex-col ${heightBySize} gap-y-4`}
           >

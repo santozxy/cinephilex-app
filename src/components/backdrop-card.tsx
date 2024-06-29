@@ -35,7 +35,7 @@ export function BackdropCard({
   path,
 }: BackdropCardProps) {
   return (
-    <section className="w-[90%] max-sm:w-full h-[40rem] max-sm:h-72 relative">
+    <section className="w-[90%] max-sm:w-full lg:h-[45rem] md:h-[40rem] max-sm:h-72 relative">
       {item.backdrop_path && (
         <Image
           priority

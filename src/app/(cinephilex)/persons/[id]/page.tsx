@@ -20,8 +20,6 @@ interface PersonProps {
 export default async function Person({ params }: PersonProps) {
   const person = await getPersonById(params.id);
   const personID = await getPersonIDforIMDB(person.imdb_id);
-  const job = person.known_for_department;
-  console.log(person.known_for_department);
 
   return (
     <main className="flex flex-col mt-6">
@@ -98,8 +96,10 @@ export default async function Person({ params }: PersonProps) {
                   : "Informação não encontrada!"}
               </span>
             </div>
-            <ListKnowFor data={personID.person_results[0].known_for} />
-            <ListPosters data={person.images.profiles} />
+            <ListKnowFor data={personID.person_results[0]?.known_for} />
+            {person.images.profiles.length != 0 && (
+              <ListPosters data={person.images.profiles} />
+            )}
           </TabsContent>
           <TabsContent value="movies" className="flex flex-col gap-4 p-3">
             {person.movie_credits.cast.length != 0 && (

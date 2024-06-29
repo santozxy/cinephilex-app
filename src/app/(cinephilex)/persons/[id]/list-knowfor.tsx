@@ -31,7 +31,7 @@ export function ListKnowFor({ data }: ListKnowForProps) {
         <h1 className="text-lg font-semibold">Conhecido por:</h1>
       </div>
       <div className="flex flex-wrap gap-4">
-        {data.map((item) => (
+        {data?.map((item) => (
           <Link
             href={generateLink(item)}
             key={item.id}
@@ -54,6 +54,11 @@ export function ListKnowFor({ data }: ListKnowForProps) {
             )}
           </Link>
         ))}
+        {!data && (
+          <div className="flex items-center justify-center p-2">
+            <h1>Sem informações</h1>
+          </div>
+        )}
       </div>
     </div>
   );
